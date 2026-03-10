@@ -1,10 +1,10 @@
 {
-  "name": "UTIs Checklist",
-  "short_name": "UTIsCK",
+  "name": "UTI Cute Guide สำหรับเภสัชกร",
+  "short_name": "UTI Guide",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f8fafc",
-  "theme_color": "#10b981",
+  "background_color": "#fffafc",
+  "theme_color": "#8b5cf6",
   "icons": [
     {
       "src": "https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png",
