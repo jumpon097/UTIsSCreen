@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UTI Cute Guide</title>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  
+  <!-- จุดที่ 1: แท็กสำหรับ PWA (เรียก manifest, icon, สีธีม) -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" href="https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png">
+  <link rel="apple-touch-icon" href="https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png">
+  <meta name="theme-color" content="#8b5cf6"> <!-- สีม่วงของธีม -->
+
   <style>
     :root{
       --bg:#fffafc;
@@ -410,12 +417,38 @@
       border:1px solid #e9d5ff;
     }
 
+    /* สไตล์สำหรับปุ่มติดตั้ง PWA */
+    #install-btn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      z-index: 1000;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+    #install-btn:hover {
+      transform: translateY(-2px);
+      background-color: #7c3aed;
+    }
+    #install-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
     @media print {
       body{
         background:#fff;
         padding:0;
       }
-      .hidden-print, .hero, .card:not(#printCardContainer){
+      .hidden-print, .hero, .card:not(#printCardContainer), #install-btn{
         display:none !important;
       }
       #printCardContainer{
@@ -708,6 +741,14 @@
     </div>
   </div>
 
+  <!-- จุดที่ 2: ปุ่มติดตั้ง PWA -->
+  <button id="install-btn" class="hidden-print">
+      <svg viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+      </svg>
+      ติดตั้งแอป
+  </button>
+
   <script>
     let lastEvaluation = null;
     let selectedDrug = null;
@@ -719,6 +760,43 @@
       refreshSignature();
       previewGreeting();
     });
+
+    // =========================================
+    // จุดที่ 3: โค้ด JavaScript สำหรับ PWA
+    // =========================================
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        if (window.location.protocol === 'https:' || window.location.protocol === 'http:') {
+          navigator.serviceWorker.register('sw.js')
+            .then(reg => console.log('Service Worker Registered!', reg.scope))
+            .catch(err => console.log('SW Error:', err.message));
+        }
+      });
+    }
+
+    let deferredPrompt;
+    const installBtn = document.getElementById('install-btn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.style.display = 'flex';
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log('Install outcome:', outcome);
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      installBtn.style.display = 'none';
+    });
+    // =========================================
 
     function autoBindSettings() {
       document.getElementById('storeName').addEventListener('input', function () {
