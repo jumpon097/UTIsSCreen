@@ -1,0 +1,22 @@
+{
+  "name": "UTIs Checklist",
+  "short_name": "UTIsCK",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f8fafc",
+  "theme_color": "#10b981",
+  "icons": [
+    {
+      "src": "https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
