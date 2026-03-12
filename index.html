@@ -4,13 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
-  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  <link rel="manifest" href="./manifest.webmanifest">
-<meta name="theme-color" content="#8b5cf6">
 
-<link rel="apple-touch-icon" href="./icons/icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- PWA -->
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#8b5cf6">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
   <style>
     :root{
       --bg:#fffafc;
@@ -35,6 +38,7 @@
     }
 
     *{box-sizing:border-box}
+
     body{
       margin:0;
       font-family:"Sarabun","Noto Sans Thai",Arial,sans-serif;
@@ -42,7 +46,9 @@
       color:var(--text);
       padding:14px;
     }
+
     .container{max-width:980px;margin:0 auto}
+
     .hero{
       background:linear-gradient(135deg,#fff0f7 0%, #f5f3ff 55%, #eef6ff 100%);
       border:1px solid var(--line);
@@ -53,6 +59,7 @@
       position:relative;
       overflow:hidden;
     }
+
     .hero:before{
       content:"";
       position:absolute;
@@ -61,11 +68,17 @@
       background:radial-gradient(circle, rgba(236,72,153,.14), transparent 70%);
       border-radius:50%;
     }
+
     .hero h1{margin:0 0 6px;font-size:1.52rem;line-height:1.3}
     .hero p{margin:0;color:var(--muted);line-height:1.65;font-size:.96rem}
+
     .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .chip{
-      padding:8px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.84rem
+      padding:8px 12px;
+      border-radius:999px;
+      background:#fff;
+      border:1px solid var(--line);
+      font-size:.84rem;
     }
 
     .card{
@@ -76,28 +89,27 @@
       margin-bottom:14px;
       box-shadow:var(--shadow);
     }
-    .section-title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+
+    .section-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom:12px;
+    }
+
     .section-title h2{margin:0;font-size:1.08rem}
     .sub{color:var(--muted);font-size:.92rem;line-height:1.55;margin-top:4px}
+
     .grid{display:grid;gap:10px}
+    .grid-1{grid-template-columns:1fr}
     .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
     .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-    .grid-1{grid-template-columns:1fr}
+
     @media(max-width:760px){
       .grid-2,.grid-3{grid-template-columns:1fr}
       .hero h1{font-size:1.26rem}
     }
-    <div class="btn-row-3" style="margin-top:10px">
-  <button id="installBtn" class="btn-primary" type="button" style="display:none;">
-    ติดตั้งแอป
-  </button>
-  <button id="iosInstallBtn" class="btn-soft" type="button" style="display:none;">
-    วิธีติดตั้งบน iPhone/iPad
-  </button>
-  <button id="openInstalledHintBtn" class="btn-gray" type="button" style="display:none;">
-    เปิดใช้งานแล้ว
-  </button>
-</div>
 
     .box{
       border:1px solid var(--line);
@@ -105,12 +117,24 @@
       padding:12px;
       background:#fff;
     }
+
     .box label{
-      display:flex;gap:10px;cursor:pointer;align-items:flex-start;line-height:1.5;font-size:.96rem
+      display:flex;
+      gap:10px;
+      cursor:pointer;
+      align-items:flex-start;
+      line-height:1.5;
+      font-size:.96rem;
     }
+
     input[type="checkbox"]{
-      width:18px;height:18px;margin-top:2px;accent-color:var(--primary);flex-shrink:0
+      width:18px;
+      height:18px;
+      margin-top:2px;
+      accent-color:var(--primary);
+      flex-shrink:0;
     }
+
     .inline-field{
       display:inline-block;
       width:120px;
@@ -123,39 +147,102 @@
       vertical-align:middle;
       background:#fff;
     }
-    .field{display:flex;flex-direction:column;gap:6px}
-    .field label{font-weight:700;font-size:.92rem}
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
+    .field label{
+      font-weight:700;
+      font-size:.92rem;
+    }
+
     .field input,.field textarea,.field select{
-      width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:.96rem;background:#fff;color:var(--text)
+      width:100%;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px;
+      font-size:.96rem;
+      background:#fff;
+      color:var(--text);
     }
-    textarea{min-height:84px;resize:vertical}
-    .setting-card{background:linear-gradient(135deg,#fff 0%, #fdf4ff 100%)}
-    .btn-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
-    .btn-row-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
-    @media(max-width:760px){.btn-row,.btn-row-3{grid-template-columns:1fr}}
+
+    textarea{
+      min-height:84px;
+      resize:vertical;
+    }
+
+    .setting-card{
+      background:linear-gradient(135deg,#fff 0%, #fdf4ff 100%);
+    }
+
+    .btn-row{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
+    }
+
+    .btn-row-3{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:10px;
+    }
+
+    @media(max-width:760px){
+      .btn-row,.btn-row-3{grid-template-columns:1fr}
+    }
+
     button{
-      border:0;border-radius:16px;padding:13px 14px;font-size:.96rem;font-weight:700;cursor:pointer
+      border:0;
+      border-radius:16px;
+      padding:13px 14px;
+      font-size:.96rem;
+      font-weight:700;
+      cursor:pointer;
     }
+
     .btn-primary{background:var(--primary);color:#fff}
     .btn-soft{background:#ede9fe;color:#5b21b6}
     .btn-pink{background:var(--pink);color:#fff}
     .btn-green{background:var(--green);color:#fff}
     .btn-gray{background:#eef2f7;color:var(--text)}
-    .result{border-radius:20px;padding:14px;border:1px solid var(--line);background:#fff}
+
+    .result{
+      border-radius:20px;
+      padding:14px;
+      border:1px solid var(--line);
+      background:#fff;
+    }
+
     .danger{background:linear-gradient(180deg,#fff 0%, #fff5f5 100%);border-color:#fecaca}
     .success{background:linear-gradient(180deg,#fff 0%, #f3fff7 100%);border-color:#bbf7d0}
     .warn{background:linear-gradient(180deg,#fff 0%, #fffaf0 100%);border-color:#fde68a}
 
     .pill{
-      display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;font-size:.84rem;font-weight:700;margin:0 6px 6px 0
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.84rem;
+      font-weight:700;
+      margin:0 6px 6px 0;
     }
+
     .pill-red{background:var(--red-soft);color:var(--red)}
     .pill-green{background:var(--green-soft);color:var(--green)}
     .pill-orange{background:var(--orange-soft);color:#b45309}
     .pill-purple{background:var(--primary-soft);color:#6d28d9}
     .pill-blue{background:var(--blue-soft);color:#1d4ed8}
 
-    .list{margin:8px 0 0;padding-left:18px;line-height:1.6}
+    .list{
+      margin:8px 0 0;
+      padding-left:18px;
+      line-height:1.6;
+    }
+
     .drug-card{
       border:1px solid var(--line);
       border-radius:18px;
@@ -163,18 +250,64 @@
       margin-top:10px;
       background:linear-gradient(135deg,#fff 0%, #fcfcff 100%);
     }
-    .drug-card h4{margin:0 0 8px;font-size:1rem;color:#4c1d95}
-    .drug-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:.92rem}
-    @media(max-width:760px){.drug-meta{grid-template-columns:1fr}}
-    .mini-btn{
-      margin-top:10px;background:var(--pink-soft);color:#be185d;padding:10px 12px;border-radius:14px;font-size:.92rem;width:100%
+
+    .drug-card h4{
+      margin:0 0 8px;
+      font-size:1rem;
+      color:#4c1d95;
     }
-    .note{margin-top:10px;color:var(--muted);font-size:.88rem;line-height:1.6}
-    .sticky{position:sticky;bottom:10px;z-index:50;margin-bottom:14px}
+
+    .drug-meta{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+      margin-top:8px;
+      font-size:.92rem;
+    }
+
+    @media(max-width:760px){
+      .drug-meta{grid-template-columns:1fr}
+    }
+
+    .mini-btn{
+      margin-top:10px;
+      background:var(--pink-soft);
+      color:#be185d;
+      padding:10px 12px;
+      border-radius:14px;
+      font-size:.92rem;
+      width:100%;
+    }
+
+    .note{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:.88rem;
+      line-height:1.6;
+    }
+
+    .sticky{
+      position:sticky;
+      bottom:10px;
+      z-index:50;
+      margin-bottom:14px;
+    }
+
     .empty{color:var(--muted)}
 
-    .ref-table{width:100%;border-collapse:collapse;font-size:.9rem}
-    .ref-table th,.ref-table td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+    .ref-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:.9rem;
+    }
+
+    .ref-table th,.ref-table td{
+      border:1px solid var(--line);
+      padding:10px;
+      text-align:left;
+      vertical-align:top;
+    }
+
     .ref-table th{background:#faf5ff}
 
     .exact-note{
@@ -192,12 +325,13 @@
       display:flex;
       justify-content:center;
     }
+
     .card-shell{display:none}
     .card-shell.active{display:block}
 
     .share-card{
       width:min(100%,420px);
-      min-height:520px;
+      min-height:560px;
       border-radius:26px;
       background:#fff;
       overflow:hidden;
@@ -299,7 +433,10 @@
       .hidden-print, .hero, .card:not(#shareStageCard){display:none !important}
       #shareStageCard{
         display:block !important;
-        box-shadow:none;border:none;margin:0;padding:0
+        box-shadow:none;
+        border:none;
+        margin:0;
+        padding:0;
       }
       .share-card{box-shadow:none;border:1px solid #ddd}
     }
@@ -310,14 +447,14 @@
     <div class="hero hidden-print">
       <h1>💜 UTI Cute Guide สำหรับเภสัชกรร้านยา</h1>
       <p>
-        เวอร์ชันนี้ปรับให้ใช้ข้อความในแบบฟอร์มตามเอกสารที่ส่งมา และสร้างการ์ดแชร์แบบกระชับสำหรับมือถือ
-        ถ้าควรส่งต่อ ระบบจะสร้าง “ใบส่งต่อเบื้องต้นจากร้านยา” ให้โดยอัตโนมัติ
+        คู่มือคัดกรอง UTIs แบบใช้งานง่ายบนมือถือ พร้อมการ์ดคำแนะนำสำหรับคนไข้,
+        ใบส่งต่อเบื้องต้นจากร้านยา, แชร์เป็นรูปภาพ และติดตั้งเป็นแอปได้
       </p>
       <div class="chip-row">
         <div class="chip">ไม่ใช้ฐานข้อมูล</div>
         <div class="chip">จำชื่อร้านยาในเครื่อง</div>
-        <div class="chip">การ์ดแชร์ 4:5</div>
-        <div class="chip">มีใบส่งต่อเบื้องต้น</div>
+        <div class="chip">แชร์เข้า LINE ได้</div>
+        <div class="chip">รองรับ PWA</div>
       </div>
     </div>
 
@@ -350,6 +487,21 @@
     <div class="card hidden-print">
       <div class="section-title">
         <div>
+          <h2>ติดตั้งแอป</h2>
+          <div class="sub">ถ้าเบราว์เซอร์รองรับ ระบบจะเปิดหน้าต่างติดตั้งให้เอง</div>
+        </div>
+      </div>
+      <div class="btn-row-3">
+        <button id="installBtn" class="btn-primary" type="button" onclick="handleInstallClick()">ติดตั้งแอป</button>
+        <button id="installHelpBtn" class="btn-soft" type="button" onclick="showInstallHelp()">วิธีติดตั้ง</button>
+        <button id="installedBtn" class="btn-gray" type="button" style="display:none;">ติดตั้งแล้ว</button>
+      </div>
+      <div id="installHint" class="note">กำลังตรวจสอบความพร้อมของการติดตั้ง...</div>
+    </div>
+
+    <div class="card hidden-print">
+      <div class="section-title">
+        <div>
           <h2>Lower UTIs</h2>
           <div class="sub">อาการแสดง</div>
         </div>
@@ -373,7 +525,7 @@
       <div class="section-title">
         <div>
           <h2>Complicated UTIs / Alarm Sign</h2>
-          <div class="sub">ใช้ถ้อยคำตามแบบฟอร์มในเอกสาร</div>
+          <div class="sub">ใช้ข้อความตามเอกสารให้ใกล้เคียงต้นฉบับ</div>
         </div>
       </div>
 
@@ -435,7 +587,7 @@
       <div class="section-title">
         <div>
           <h2>Treatment</h2>
-          <div class="sub">ข้อมูลช่วยจัดตัวเลือกยาและการส่งต่อ</div>
+          <div class="sub">ข้อมูลนี้ใช้ช่วยจัดตัวเลือกยาและการส่งต่อ</div>
         </div>
       </div>
 
@@ -499,9 +651,7 @@
       <div class="grid grid-2">
         <div>
           <div class="section-title">
-            <div>
-              <h2>UTIs in pregnancy</h2>
-            </div>
+            <div><h2>UTIs in pregnancy</h2></div>
           </div>
           <div class="exact-note">
             แนะนำให้ส่ง urine culture เมื่อมีอาการและอาการแสดงของภาวะ cystitis หรือ pyelonephritis โดย urine culture ควรพบเชื้อก่อโรคทางเดินปัสสาวะ &gt;10<sup>5</sup> CFU/mL
@@ -511,9 +661,7 @@
 
         <div>
           <div class="section-title">
-            <div>
-              <h2>Catheter-associated UTIs</h2>
-            </div>
+            <div><h2>Catheter-associated UTIs</h2></div>
           </div>
           <div class="exact-note">
             ผู้ป่วยแสดงอาการด้านการติดเชื้อทางเดินปัสสาวะ หลังการใส่สายสวน หรือ หลังถอดสายสวนไม่เกิน 48 ชั่วโมง อาจสังเกตจากปัสสาวะขุ่น หรือมีเลือดปนได้
@@ -563,13 +711,13 @@
       </div>
 
       <div id="shareWrap" class="share-wrap">
-        <!-- Patient Advice Card -->
         <div id="patientShell" class="card-shell active">
           <div id="patientCard" class="share-card">
             <div class="share-top">
               <div class="share-title">💗 การ์ดคำแนะนำสำหรับคนไข้</div>
               <div class="share-badge" id="patientBadge">คำแนะนำสุขภาพ</div>
             </div>
+
             <div class="share-body">
               <div class="share-box">
                 <h4>สรุปเบื้องต้น</h4>
@@ -582,7 +730,7 @@
               </div>
 
               <div class="share-box">
-                <h4>คำแนะนำสั้น ๆ</h4>
+                <h4>วิธีใช้ยา / คำแนะนำ</h4>
                 <ul id="patientAdviceList">
                   <li>กรุณาประเมินเคสก่อน</li>
                 </ul>
@@ -595,13 +743,13 @@
                 </ul>
               </div>
             </div>
+
             <div class="share-sign" id="patientSignature">
               ด้วยความปรารถนาดีจากร้าน...<br>โดยเภสัชกร...
             </div>
           </div>
         </div>
 
-        <!-- Referral Card -->
         <div id="referralShell" class="card-shell">
           <div id="referralCard" class="share-card">
             <div class="share-top">
@@ -652,9 +800,7 @@
 
     <div class="card hidden-print">
       <div class="section-title">
-        <div>
-          <h2>Drug in UTIs</h2>
-        </div>
+        <div><h2>Drug in UTIs</h2></div>
       </div>
       <div style="overflow-x:auto">
         <table class="ref-table">
@@ -719,12 +865,17 @@
     let lastEvaluation = null;
     let selectedDrug = null;
     let currentDrugList = [];
+    let deferredPrompt = null;
 
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', async function () {
       loadSettings();
       autoBindSettings();
       refreshSignatures();
       previewGreeting();
+
+      await registerServiceWorker();
+      setTimeout(renderInstallUI, 800);
+
       generateShareCard();
     });
 
@@ -734,6 +885,7 @@
         refreshSignatures();
         previewGreeting();
       });
+
       document.getElementById('pharmacistName').addEventListener('input', function () {
         localStorage.setItem('uti_pharmacist_name', this.value.trim());
         refreshSignatures();
@@ -805,6 +957,92 @@
         'ส่งต่อโดยร้าน <strong>' + escapeHtml(store) + '</strong><br>' +
         'เภสัชกร <strong>' + escapeHtml(phar) + '</strong>';
     }
+
+    function isIosDevice() {
+      return /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+    }
+
+    function isStandaloneMode() {
+      return window.matchMedia('(display-mode: standalone)').matches ||
+             window.navigator.standalone === true;
+    }
+
+    async function registerServiceWorker() {
+      if (!('serviceWorker' in navigator)) return;
+      try {
+        await navigator.serviceWorker.register('./sw.js', { scope: './' });
+      } catch (err) {
+        console.error('SW registration failed', err);
+      }
+    }
+
+    function renderInstallUI() {
+      const installBtn = document.getElementById('installBtn');
+      const installHelpBtn = document.getElementById('installHelpBtn');
+      const installedBtn = document.getElementById('installedBtn');
+      const installHint = document.getElementById('installHint');
+
+      if (isStandaloneMode()) {
+        installBtn.style.display = 'none';
+        installHelpBtn.style.display = 'none';
+        installedBtn.style.display = 'inline-block';
+        installHint.innerHTML = 'อุปกรณ์นี้เปิดใช้งานแอปแบบติดตั้งแล้ว';
+        return;
+      }
+
+      installedBtn.style.display = 'none';
+      installBtn.style.display = 'inline-block';
+      installHelpBtn.style.display = 'inline-block';
+
+      if (deferredPrompt) {
+        installHint.innerHTML = 'พร้อมติดตั้งแล้ว กดปุ่ม “ติดตั้งแอป” ได้เลย';
+      } else if (isIosDevice()) {
+        installHint.innerHTML = 'บน iPhone/iPad ให้เปิดด้วย Safari แล้วกด Share > Add to Home Screen';
+      } else {
+        installHint.innerHTML = 'ถ้ายังไม่มีหน้าต่างติดตั้ง ให้กด “วิธีติดตั้ง” หรือรีเฟรชหน้าอีก 1 ครั้งหลังอัปโหลดไฟล์ครบ';
+      }
+    }
+
+    async function handleInstallClick() {
+      if (isStandaloneMode()) {
+        alert('แอปนี้ถูกติดตั้งแล้ว หรือกำลังเปิดในโหมดแอป');
+        return;
+      }
+
+      if (deferredPrompt) {
+        const promptEvent = deferredPrompt;
+        deferredPrompt = null;
+        try {
+          await promptEvent.prompt();
+          await promptEvent.userChoice;
+        } catch (err) {
+          console.error(err);
+        }
+        renderInstallUI();
+        return;
+      }
+
+      showInstallHelp();
+    }
+
+    function showInstallHelp() {
+      if (isIosDevice()) {
+        alert('บน iPhone/iPad ให้เปิดเว็บนี้ด้วย Safari แล้วแตะปุ่ม Share จากนั้นเลือก "Add to Home Screen"');
+      } else {
+        alert('ถ้าไม่มีหน้าต่างติดตั้งขึ้น ให้เปิดเว็บนี้ด้วย Chrome หรือ Edge แล้วกดเมนูเบราว์เซอร์ > Install app หรือ Add to Home Screen');
+      }
+    }
+
+    window.addEventListener('beforeinstallprompt', (event) => {
+      event.preventDefault();
+      deferredPrompt = event;
+      renderInstallUI();
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      renderInstallUI();
+    });
 
     function getChecked(id) {
       return document.getElementById(id).checked;
@@ -910,7 +1148,7 @@
           tagClass: 'pill-red',
           boxClass: 'danger',
           title: 'Upper UTIs',
-          summary: 'ให้วินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย',
+          summary: 'ใหวินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย',
           reasons: data.upperSymptoms,
           actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
@@ -965,14 +1203,14 @@
           drugs.push({
             name: 'Nitrofurantoin',
             label: 'Nitrofurantoin 5 วัน',
-            dose: 'Nitrofurantoin 5 วัน',
-            shortDose: 'Nitrofurantoin 5 วัน',
+            dose: 'Nitrofurantoin 5 วัน หลีกเลี่ยงหาก CrCl < 30 mL/min',
+            shortDose: '100 mg PO QID x 5 วัน',
             status: 'หลีกเลี่ยงหาก CrCl < 30 mL/min',
-            note: 'First-line therapy',
-            instruction: [
-              'รับประทานยาให้ครบตามระยะเวลาที่แนะนำ',
-              'ดื่มน้ำให้เพียงพอ',
-              'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
+            note: 'Nitrofurantoin microcrystal 100 mg PO QID หรือ monohydrate/macrocrystal 100 mg PO BID',
+            howToUse: [
+              'สูตร microcrystal: ครั้งละ 100 mg วันละ 4 ครั้ง นาน 5 วัน',
+              'หรือสูตร monohydrate/macrocrystal: ครั้งละ 100 mg วันละ 2 ครั้ง นาน 5 วัน',
+              'รับประทานหลังอาหารและดื่มน้ำตาม'
             ]
           });
         }
@@ -981,29 +1219,29 @@
           drugs.push({
             name: 'Fosfomycin',
             label: 'Fosfomycin single dose',
-            dose: 'Fosfomycin single dose',
-            shortDose: 'Fosfomycin single dose',
+            dose: 'Fosfomycin single dose หลีกเลี่ยงหาก CrCl < 10 mL/min',
+            shortDose: '3 g PO single dose',
             status: 'หลีกเลี่ยงหาก CrCl < 10 mL/min',
-            note: '',
-            instruction: [
-              'รับประทานครั้งเดียวตามคำแนะนำ',
-              'ดื่มน้ำให้เพียงพอ',
+            note: 'Fosfomycin trometamol (oral)',
+            howToUse: [
+              'ครั้งละ 3 g รับประทานครั้งเดียว',
+              'ละลายน้ำตามคำแนะนำของผลิตภัณฑ์ก่อนรับประทาน',
               'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
             ]
           });
         }
 
         drugs.push({
-          name: 'Oral thrid generation cephalosporin เช่น cefixime',
-          label: 'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
-          dose: 'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
-          shortDose: 'cefixime กิน 7 วัน',
-          status: '',
-          note: '',
-          instruction: [
+          name: 'Oral third generation cephalosporin เช่น cefixime',
+          label: 'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
+          dose: 'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
+          shortDose: 'Cefixime 400 mg PO OD หรือ BID x 7 วัน',
+          status: '-',
+          note: '-',
+          howToUse: [
+            'Cefixime 400 mg รับประทานวันละครั้ง หรือแบ่งตามความเหมาะสม นาน 7 วัน',
             'รับประทานยาให้ครบ 7 วัน',
-            'ถ้ามีผื่น คัน หรือหายใจลำบาก ให้หยุดยาและไปโรงพยาบาล',
-            'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
+            'หากมีผื่น คัน หรือหายใจลำบาก ให้หยุดยาและไปโรงพยาบาล'
           ]
         });
 
@@ -1011,28 +1249,28 @@
           name: 'Amoxicillin/clavulanic acid',
           label: 'Amoxicillin/clavulanic acid กิน 7 วัน',
           dose: 'Amoxicillin/clavulanic acid กิน 7 วัน',
-          shortDose: 'Amoxicillin/clavulanic acid กิน 7 วัน',
-          status: '',
-          note: '',
-          instruction: [
-            'รับประทานยาให้ครบ 7 วัน',
+          shortDose: '1 g PO BID x 7 วัน',
+          status: '-',
+          note: '-',
+          howToUse: [
+            'ครั้งละ 1 g วันละ 2 ครั้ง นาน 7 วัน',
             'รับประทานพร้อมอาหารได้',
-            'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
+            'รับประทานยาให้ครบ 7 วัน'
           ]
         });
 
         if (cultureYes) {
           drugs.push({
             name: 'Culture-directed',
-            label: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน',
-            dose: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน',
+            label: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา',
+            dose: 'Ciprofloxacin, Levofloxacin หรือ TMP/SMX ตามผล urine culture',
             shortDose: 'ใช้ตามผล urine culture',
-            status: '',
-            note: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา',
-            instruction: [
-              'ใช้ตามผล urine culture',
-              'ทบทวนความเสี่ยงเชื้อดื้อยาก่อนใช้',
-              'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
+            status: '-',
+            note: 'ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา',
+            howToUse: [
+              'ใช้ตามผล urine culture เท่านั้น',
+              'Ciprofloxacin หรือ Levofloxacin กิน 3 วัน',
+              'หรือ TMP/SMX กิน 3 วัน ตามความเหมาะสม'
             ]
           });
         }
@@ -1048,7 +1286,7 @@
             'Treatment:',
             'Nitrofurantoin 5 วัน หลีกเลี่ยงหาก CrCl < 30 mL/min',
             'Fosfomycin single dose หลีกเลี่ยงหาก CrCl < 10 mL/min',
-            'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
+            'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
             'Amoxicillin/clavulanic acid กิน 7 วัน',
             'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน'
           ],
@@ -1180,11 +1418,12 @@
 
         if (selectedDrug) {
           document.getElementById('patientDrug').innerHTML =
-            '<strong>' + escapeHtml(selectedDrug.label) + '</strong>';
+            '<strong>' + escapeHtml(selectedDrug.label) + '</strong><br>' +
+            '<span class="small-meta">' + escapeHtml(selectedDrug.shortDose || selectedDrug.dose) + '</span>';
 
           const advice = []
-            .concat(selectedDrug.instruction || [])
-            .slice(0, 4);
+            .concat(selectedDrug.howToUse || [])
+            .slice(0, 3);
 
           document.getElementById('patientAdviceList').innerHTML =
             advice.map(x => '<li>' + escapeHtml(x) + '</li>').join('');
@@ -1303,89 +1542,5 @@
         .replace(/'/g, '&#039;');
     }
   </script>
-  <script>
-  let deferredPrompt = null;
-
-  const installBtn = document.getElementById("installBtn");
-  const iosInstallBtn = document.getElementById("iosInstallBtn");
-  const openInstalledHintBtn = document.getElementById("openInstalledHintBtn");
-
-  const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
-  const isStandalone =
-    window.matchMedia("(display-mode: standalone)").matches ||
-    window.navigator.standalone === true;
-
-  async function registerServiceWorker() {
-    if (!("serviceWorker" in navigator)) return;
-
-    try {
-      await navigator.serviceWorker.register("./sw.js", { scope: "./" });
-      console.log("Service Worker registered");
-    } catch (err) {
-      console.error("Service Worker registration failed:", err);
-    }
-  }
-
-  function updateInstallUI() {
-    if (isStandalone) {
-      installBtn.style.display = "none";
-      iosInstallBtn.style.display = "none";
-      openInstalledHintBtn.style.display = "inline-flex";
-      return;
-    }
-
-    if (deferredPrompt) {
-      installBtn.style.display = "inline-flex";
-    } else {
-      installBtn.style.display = "none";
-    }
-
-    if (isIos && !isStandalone) {
-      iosInstallBtn.style.display = "inline-flex";
-    } else {
-      iosInstallBtn.style.display = "none";
-    }
-
-    openInstalledHintBtn.style.display = "none";
-  }
-
-  window.addEventListener("load", async () => {
-    await registerServiceWorker();
-    updateInstallUI();
-  });
-
-  window.addEventListener("beforeinstallprompt", (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-    updateInstallUI();
-  });
-
-  installBtn?.addEventListener("click", async () => {
-    if (!deferredPrompt) return;
-
-    deferredPrompt.prompt();
-    const choice = await deferredPrompt.userChoice;
-    console.log("Install choice:", choice.outcome);
-
-    deferredPrompt = null;
-    updateInstallUI();
-  });
-
-  window.addEventListener("appinstalled", () => {
-    deferredPrompt = null;
-    updateInstallUI();
-    console.log("PWA installed");
-  });
-
-  iosInstallBtn?.addEventListener("click", () => {
-    alert(
-      'บน iPhone/iPad ให้เปิดเว็บนี้ด้วย Safari แล้วแตะปุ่ม Share จากนั้นเลือก "Add to Home Screen"'
-    );
-  });
-
-  openInstalledHintBtn?.addEventListener("click", () => {
-    alert("แอปถูกติดตั้งแล้ว หรือกำลังเปิดในโหมดแอป");
-  });
-</script>
 </body>
 </html>
