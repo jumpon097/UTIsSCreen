@@ -5,46 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
 
-  <!-- PWA Meta Tags -->
+  <!-- PWA Meta Tags แบบมาตรฐาน -->
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#8b5cf6">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzhiNWNmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTUlIiBmb250LXNpemU9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+8J+SgzwvdGV4dD48L3N2Zz4=">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="UTI Guide">
-
-  <!-- Dynamic PWA Manifest Generator สำหรับแก้ปัญหาบน GitHub Pages -->
-  <script>
-    (function() {
-      const svgIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="#8b5cf6"/><text x="50%" y="55%" font-size="250" text-anchor="middle" dominant-baseline="middle">💜</text></svg>';
-      const iconDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgIcon)));
-      
-      const manifest = {
-        name: "UTI Cute Guide สำหรับเภสัชกร",
-        short_name: "UTI Guide",
-        // ดึง Path ปัจจุบันของเว็บมาตั้งเป็นจุดเริ่มต้นเสมอ (รองรับ Subfolder ของ github.io)
-        start_url: window.location.pathname, 
-        display: "standalone",
-        background_color: "#fffafc",
-        theme_color: "#8b5cf6",
-        icons: [
-          { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-          { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
-        ]
-      };
-
-      const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
-      const manifestUrl = URL.createObjectURL(blob);
-
-      const link = document.createElement('link');
-      link.rel = 'manifest';
-      link.href = manifestUrl;
-      document.head.appendChild(link);
-
-      const appleIcon = document.createElement('link');
-      appleIcon.rel = 'apple-touch-icon';
-      appleIcon.href = iconDataUrl;
-      document.head.appendChild(appleIcon);
-    })();
-  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
