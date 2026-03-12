@@ -1,17 +1,10 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-  
-  <!-- จุดที่ 1: แท็กสำหรับ PWA (เรียก manifest, icon, สีธีม) -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="icon" type="image/png" href="https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png">
-  <link rel="apple-touch-icon" href="https://img2.pic.in.th/35F9F2E4-F93B-4E93-8630-AA51B9AE5118.png">
-  <meta name="theme-color" content="#8b5cf6"> <!-- สีม่วงของธีม -->
-
   <style>
     :root{
       --bg:#fffafc;
@@ -36,20 +29,14 @@
     }
 
     *{box-sizing:border-box}
-
     body{
       margin:0;
-      font-family:"Sarabun", "Noto Sans Thai", Arial, sans-serif;
+      font-family:"Sarabun","Noto Sans Thai",Arial,sans-serif;
       background:linear-gradient(180deg,#fff7fb 0%, #f9fbff 100%);
       color:var(--text);
       padding:14px;
     }
-
-    .container{
-      max-width:920px;
-      margin:0 auto;
-    }
-
+    .container{max-width:980px;margin:0 auto}
     .hero{
       background:linear-gradient(135deg,#fff0f7 0%, #f5f3ff 55%, #eef6ff 100%);
       border:1px solid var(--line);
@@ -60,44 +47,19 @@
       position:relative;
       overflow:hidden;
     }
-
     .hero:before{
       content:"";
       position:absolute;
-      right:-40px;
-      top:-40px;
-      width:140px;
-      height:140px;
+      right:-40px;top:-40px;
+      width:140px;height:140px;
       background:radial-gradient(circle, rgba(236,72,153,.14), transparent 70%);
       border-radius:50%;
     }
-
-    .hero h1{
-      margin:0 0 6px;
-      font-size:1.55rem;
-      line-height:1.3;
-    }
-
-    .hero p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.65;
-      font-size:.96rem;
-    }
-
-    .chip-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:12px;
-    }
-
+    .hero h1{margin:0 0 6px;font-size:1.52rem;line-height:1.3}
+    .hero p{margin:0;color:var(--muted);line-height:1.65;font-size:.96rem}
+    .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
     .chip{
-      padding:8px 12px;
-      border-radius:999px;
-      background:#fff;
-      border:1px solid var(--line);
-      font-size:.84rem;
+      padding:8px 12px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:.84rem
     }
 
     .card{
@@ -108,38 +70,16 @@
       margin-bottom:14px;
       box-shadow:var(--shadow);
     }
-
-    .section-title{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      margin-bottom:12px;
-    }
-
-    .section-title h2{
-      margin:0;
-      font-size:1.08rem;
-    }
-
-    .sub{
-      color:var(--muted);
-      font-size:.92rem;
-      line-height:1.5;
-      margin-top:4px;
-    }
-
-    .grid{
-      display:grid;
-      gap:10px;
-    }
-
-    .grid-2{ grid-template-columns:repeat(2,minmax(0,1fr)); }
-    .grid-3{ grid-template-columns:repeat(3,minmax(0,1fr)); }
-
+    .section-title{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:12px}
+    .section-title h2{margin:0;font-size:1.08rem}
+    .sub{color:var(--muted);font-size:.92rem;line-height:1.55;margin-top:4px}
+    .grid{display:grid;gap:10px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid-1{grid-template-columns:1fr}
     @media(max-width:760px){
-      .grid-2,.grid-3{ grid-template-columns:1fr; }
-      .hero h1{ font-size:1.28rem; }
+      .grid-2,.grid-3{grid-template-columns:1fr}
+      .hero h1{font-size:1.26rem}
     }
 
     .box{
@@ -148,119 +88,57 @@
       padding:12px;
       background:#fff;
     }
-
     .box label{
-      display:flex;
-      gap:10px;
-      cursor:pointer;
-      align-items:flex-start;
-      line-height:1.5;
-      font-size:.96rem;
+      display:flex;gap:10px;cursor:pointer;align-items:flex-start;line-height:1.5;font-size:.96rem
     }
-
-    input[type="checkbox"], input[type="radio"]{
-      width:18px;
-      height:18px;
-      margin-top:2px;
-      accent-color:var(--primary);
-      flex-shrink:0;
+    input[type="checkbox"]{
+      width:18px;height:18px;margin-top:2px;accent-color:var(--primary);flex-shrink:0
     }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:6px;
-    }
-
-    .field label{
-      font-weight:700;
-      font-size:.92rem;
-    }
-
-    .field input, .field textarea, .field select{
-      width:100%;
+    .inline-field{
+      display:inline-block;
+      width:120px;
+      max-width:100%;
       border:1px solid var(--line);
-      border-radius:14px;
-      padding:12px;
-      font-size:.96rem;
+      border-radius:10px;
+      padding:6px 8px;
+      font-size:.9rem;
+      margin:0 4px;
+      vertical-align:middle;
       background:#fff;
-      color:var(--text);
     }
-
-    textarea{
-      min-height:84px;
-      resize:vertical;
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-weight:700;font-size:.92rem}
+    .field input,.field textarea,.field select{
+      width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;font-size:.96rem;background:#fff;color:var(--text)
     }
-
-    .setting-card{
-      background:linear-gradient(135deg,#fff 0%, #fdf4ff 100%);
-    }
-
-    .btn-row{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:10px;
-    }
-
-    .btn-row-3{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:10px;
-    }
-
-    @media(max-width:760px){
-      .btn-row,.btn-row-3{ grid-template-columns:1fr; }
-    }
-
+    textarea{min-height:84px;resize:vertical}
+    .setting-card{background:linear-gradient(135deg,#fff 0%, #fdf4ff 100%)}
+    .btn-row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+    .btn-row-3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+    @media(max-width:760px){.btn-row,.btn-row-3{grid-template-columns:1fr}}
     button{
-      border:0;
-      border-radius:16px;
-      padding:13px 14px;
-      font-size:.96rem;
-      font-weight:700;
-      cursor:pointer;
+      border:0;border-radius:16px;padding:13px 14px;font-size:.96rem;font-weight:700;cursor:pointer
     }
-
-    .btn-primary{ background:var(--primary); color:#fff; }
-    .btn-soft{ background:#ede9fe; color:#5b21b6; }
-    .btn-pink{ background:var(--pink); color:#fff; }
-    .btn-green{ background:var(--green); color:#fff; }
-    .btn-gray{ background:#eef2f7; color:var(--text); }
-
-    .result{
-      border-radius:20px;
-      padding:14px;
-      border:1px solid var(--line);
-      background:#fff;
-    }
-
-    .danger{ background:linear-gradient(180deg,#fff 0%, #fff5f5 100%); border-color:#fecaca; }
-    .success{ background:linear-gradient(180deg,#fff 0%, #f3fff7 100%); border-color:#bbf7d0; }
-    .warn{ background:linear-gradient(180deg,#fff 0%, #fffaf0 100%); border-color:#fde68a; }
+    .btn-primary{background:var(--primary);color:#fff}
+    .btn-soft{background:#ede9fe;color:#5b21b6}
+    .btn-pink{background:var(--pink);color:#fff}
+    .btn-green{background:var(--green);color:#fff}
+    .btn-gray{background:#eef2f7;color:var(--text)}
+    .result{border-radius:20px;padding:14px;border:1px solid var(--line);background:#fff}
+    .danger{background:linear-gradient(180deg,#fff 0%, #fff5f5 100%);border-color:#fecaca}
+    .success{background:linear-gradient(180deg,#fff 0%, #f3fff7 100%);border-color:#bbf7d0}
+    .warn{background:linear-gradient(180deg,#fff 0%, #fffaf0 100%);border-color:#fde68a}
 
     .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:7px 11px;
-      border-radius:999px;
-      font-size:.84rem;
-      font-weight:700;
-      margin:0 6px 6px 0;
+      display:inline-flex;align-items:center;gap:6px;padding:7px 11px;border-radius:999px;font-size:.84rem;font-weight:700;margin:0 6px 6px 0
     }
+    .pill-red{background:var(--red-soft);color:var(--red)}
+    .pill-green{background:var(--green-soft);color:var(--green)}
+    .pill-orange{background:var(--orange-soft);color:#b45309}
+    .pill-purple{background:var(--primary-soft);color:#6d28d9}
+    .pill-blue{background:var(--blue-soft);color:#1d4ed8}
 
-    .pill-red{ background:var(--red-soft); color:var(--red); }
-    .pill-green{ background:var(--green-soft); color:var(--green); }
-    .pill-orange{ background:var(--orange-soft); color:#b45309; }
-    .pill-purple{ background:var(--primary-soft); color:#6d28d9; }
-    .pill-blue{ background:var(--blue-soft); color:#1d4ed8; }
-
-    .list{
-      margin:8px 0 0;
-      padding-left:18px;
-      line-height:1.6;
-    }
-
+    .list{margin:8px 0 0;padding-left:18px;line-height:1.6}
     .drug-card{
       border:1px solid var(--line);
       border-radius:18px;
@@ -268,204 +146,145 @@
       margin-top:10px;
       background:linear-gradient(135deg,#fff 0%, #fcfcff 100%);
     }
-
-    .drug-card h4{
-      margin:0 0 8px;
-      font-size:1rem;
-      color:#4c1d95;
-    }
-
-    .drug-meta{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:8px;
-      margin-top:8px;
-      font-size:.92rem;
-    }
-
-    @media(max-width:760px){
-      .drug-meta{ grid-template-columns:1fr; }
-    }
-
+    .drug-card h4{margin:0 0 8px;font-size:1rem;color:#4c1d95}
+    .drug-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;font-size:.92rem}
+    @media(max-width:760px){.drug-meta{grid-template-columns:1fr}}
     .mini-btn{
-      margin-top:10px;
-      background:var(--pink-soft);
-      color:#be185d;
-      padding:10px 12px;
+      margin-top:10px;background:var(--pink-soft);color:#be185d;padding:10px 12px;border-radius:14px;font-size:.92rem;width:100%
+    }
+    .note{margin-top:10px;color:var(--muted);font-size:.88rem;line-height:1.6}
+    .sticky{position:sticky;bottom:10px;z-index:50;margin-bottom:14px}
+    .empty{color:var(--muted)}
+
+    .ref-table{width:100%;border-collapse:collapse;font-size:.9rem}
+    .ref-table th,.ref-table td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top}
+    .ref-table th{background:#faf5ff}
+
+    .exact-note{
+      border-left:4px solid #93c5fd;
+      background:#f8fbff;
+      padding:12px 14px;
       border-radius:14px;
+      line-height:1.65;
+      color:#334155;
       font-size:.92rem;
-      width:100%;
-    }
-
-    .note{
       margin-top:10px;
-      color:var(--muted);
-      font-size:.88rem;
-      line-height:1.6;
     }
 
-    .patient-card-wrap{
-      background:linear-gradient(180deg,#fff 0%, #fff8fc 100%);
-      border:2px dashed #e9d5ff;
-      border-radius:24px;
-      padding:16px;
+    .share-wrap{
+      display:flex;
+      justify-content:center;
     }
+    .card-shell{display:none}
+    .card-shell.active{display:block}
 
-    .patient-card{
+    .share-card{
+      width:min(100%,420px);
+      min-height:520px;
+      border-radius:26px;
       background:#fff;
-      border:1px solid #f3d3e6;
-      border-radius:24px;
-      padding:18px;
-      box-shadow:0 8px 20px rgba(236,72,153,.08);
+      overflow:hidden;
+      border:1px solid #f1d5e5;
+      box-shadow:0 12px 28px rgba(236,72,153,.10);
+      display:flex;
+      flex-direction:column;
     }
 
-    .pc-head{
+    .share-top{
+      padding:16px 16px 12px;
+      background:linear-gradient(135deg,#fff0f7 0%, #f5f3ff 55%, #eef6ff 100%);
+      border-bottom:1px dashed #f1d5e5;
+    }
+
+    .share-title{
+      font-size:1.12rem;
+      font-weight:800;
+      color:#7c3aed;
+      line-height:1.35;
+    }
+
+    .share-badge{
+      display:inline-block;
+      margin-top:8px;
+      padding:7px 11px;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:700;
+      background:#fdf2f8;
+      color:#be185d;
+    }
+
+    .share-body{
+      padding:14px 16px;
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .share-box{
+      border:1px solid #f3d3e6;
+      border-radius:18px;
+      padding:12px;
+      background:#fff;
+    }
+
+    .share-box h4{
+      margin:0 0 6px;
+      font-size:.94rem;
+      color:#374151;
+    }
+
+    .share-box ul{
+      margin:0;
+      padding-left:18px;
+      line-height:1.55;
+      font-size:.93rem;
+    }
+
+    .share-sign{
+      margin-top:auto;
+      background:linear-gradient(135deg,#faf5ff 0%, #fdf2f8 100%);
+      border-top:1px dashed #f1d5e5;
+      padding:14px 16px;
+      line-height:1.65;
+      font-size:.93rem;
+      text-align:center;
+    }
+
+    .small-meta{
+      color:#64748b;
+      font-size:.86rem;
+      line-height:1.55;
+    }
+
+    .formal-head{
       display:flex;
       justify-content:space-between;
       align-items:flex-start;
       gap:10px;
-      border-bottom:1px dashed #f3d3e6;
-      padding-bottom:12px;
-      margin-bottom:12px;
     }
 
-    .pc-title{
-      font-size:1.15rem;
-      font-weight:800;
-      color:#7c3aed;
-    }
-
-    .pc-badge{
-      background:#fdf2f8;
-      color:#be185d;
+    .formal-tag{
+      padding:6px 10px;
       border-radius:999px;
-      padding:7px 12px;
-      font-size:.82rem;
+      background:#fee2e2;
+      color:#b91c1c;
+      font-size:.8rem;
       font-weight:700;
       white-space:nowrap;
     }
 
-    .pc-section{
-      margin-bottom:12px;
-    }
+    .hidden-print{display:block}
 
-    .pc-section h4{
-      margin:0 0 8px;
-      font-size:.96rem;
-      color:#374151;
-    }
-
-    .pc-list{
-      margin:0;
-      padding-left:18px;
-      line-height:1.65;
-      font-size:.95rem;
-    }
-
-    .signature{
-      margin-top:14px;
-      background:linear-gradient(135deg,#faf5ff 0%, #fdf2f8 100%);
-      border:1px solid #f5d0fe;
-      border-radius:18px;
-      padding:12px;
-      text-align:center;
-      line-height:1.7;
-      font-size:.95rem;
-    }
-
-    .sticky{
-      position:sticky;
-      bottom:10px;
-      z-index:50;
-      margin-bottom:14px;
-    }
-
-    .empty{
-      color:var(--muted);
-    }
-
-    .ref-table{
-      width:100%;
-      border-collapse:collapse;
-      font-size:.9rem;
-      overflow:hidden;
-    }
-
-    .ref-table th,.ref-table td{
-      border:1px solid var(--line);
-      padding:10px;
-      text-align:left;
-      vertical-align:top;
-    }
-
-    .ref-table th{
-      background:#faf5ff;
-    }
-
-    .hidden-print{
-      display:block;
-    }
-
-    .small-capsule{
-      display:inline-block;
-      padding:3px 8px;
-      border-radius:999px;
-      background:#faf5ff;
-      color:#6d28d9;
-      font-size:.78rem;
-      margin-left:6px;
-      border:1px solid #e9d5ff;
-    }
-
-    /* สไตล์สำหรับปุ่มติดตั้ง PWA */
-    #install-btn {
-      display: none;
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 50px;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: var(--shadow);
-      z-index: 1000;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-    }
-    #install-btn:hover {
-      transform: translateY(-2px);
-      background-color: #7c3aed;
-    }
-    #install-btn svg { width: 20px; height: 20px; fill: currentColor; }
-
-    @media print {
-      body{
-        background:#fff;
-        padding:0;
-      }
-      .hidden-print, .hero, .card:not(#printCardContainer), #install-btn{
-        display:none !important;
-      }
-      #printCardContainer{
+    @media print{
+      body{background:#fff;padding:0}
+      .hidden-print, .hero, .card:not(#shareStageCard){display:none !important}
+      #shareStageCard{
         display:block !important;
-        box-shadow:none;
-        border:none;
-        margin:0;
-        padding:0;
+        box-shadow:none;border:none;margin:0;padding:0
       }
-      .patient-card-wrap{
-        border:none;
-        padding:0;
-      }
-      .patient-card{
-        box-shadow:none;
-        border:1px solid #ddd;
-      }
+      .share-card{box-shadow:none;border:1px solid #ddd}
     }
   </style>
 </head>
@@ -474,14 +293,14 @@
     <div class="hero hidden-print">
       <h1>💜 UTI Cute Guide สำหรับเภสัชกรร้านยา</h1>
       <p>
-        คู่มือคัดกรองและช่วยเลือกยาสำหรับ UTIs แบบใช้งานง่ายบนมือถือ
-        พร้อมสร้างการ์ดคำแนะนำคนไข้ และแชร์เป็นรูปภาพเข้า LINE ได้
+        เวอร์ชันนี้ปรับให้ใช้ข้อความในแบบฟอร์มตามเอกสารที่ส่งมา และสร้างการ์ดแชร์แบบกระชับสำหรับมือถือ
+        ถ้าควรส่งต่อ ระบบจะสร้าง “ใบส่งต่อเบื้องต้นจากร้านยา” ให้โดยอัตโนมัติ
       </p>
       <div class="chip-row">
         <div class="chip">ไม่ใช้ฐานข้อมูล</div>
         <div class="chip">จำชื่อร้านยาในเครื่อง</div>
-        <div class="chip">แชร์การ์ดเป็นรูปภาพ</div>
-        <div class="chip">พิมพ์หรือ Save PDF ได้</div>
+        <div class="chip">การ์ดแชร์ 4:5</div>
+        <div class="chip">มีใบส่งต่อเบื้องต้น</div>
       </div>
     </div>
 
@@ -489,7 +308,7 @@
       <div class="section-title">
         <div>
           <h2>⚙️ Settings ร้านยา</h2>
-          <div class="sub">ข้อมูลส่วนนี้จะบันทึกไว้ในเครื่องของผู้ใช้เอง ไม่ใช้ Google Sheet</div>
+          <div class="sub">ข้อมูลจะถูกบันทึกไว้ในเครื่องของผู้ใช้เองด้วย localStorage</div>
         </div>
       </div>
       <div class="grid grid-2">
@@ -499,7 +318,7 @@
         </div>
         <div class="field">
           <label for="pharmacistName">ชื่อเภสัชกร</label>
-          <input id="pharmacistName" type="text" placeholder="เช่น ภก.สมชาย ใจดี">
+          <input id="pharmacistName" type="text" placeholder="เช่น ภก.จุมพล อุทธา">
         </div>
       </div>
       <div style="margin-top:10px" class="btn-row">
@@ -514,60 +333,95 @@
     <div class="card hidden-print">
       <div class="section-title">
         <div>
-          <h2>1) อาการ Lower UTI</h2>
-          <div class="sub">เลือกได้มากกว่า 1 ข้อ</div>
+          <h2>Lower UTIs</h2>
+          <div class="sub">อาการแสดง</div>
         </div>
       </div>
+
       <div class="grid grid-2">
         <div class="box"><label><input type="checkbox" id="dysuria"><span>ปัสสาวะแสบขัด (Dysuria)</span></label></div>
-        <div class="box"><label><input type="checkbox" id="suprapubicPain"><span>ปวด/กดเจ็บบริเวณหัวหน่าว</span></label></div>
-        <div class="box"><label><input type="checkbox" id="turbidUrine"><span>ปัสสาวะขุ่น</span></label></div>
-        <div class="box"><label><input type="checkbox" id="hematuria"><span>ปัสสาวะปนเลือด</span></label></div>
-        <div class="box"><label><input type="checkbox" id="frequency"><span>ปัสสาวะบ่อย</span></label></div>
-        <div class="box"><label><input type="checkbox" id="urgency"><span>ปวดปัสสาวะทันที / ปัสสาวะไม่สุด</span></label></div>
+        <div class="box"><label><input type="checkbox" id="suprapubicPain"><span>ปวดหรือกดเจ็บบริเวณหัวหน่าว (suprapubic pain/tenderness)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="turbidUrine"><span>ปัสสาวะขุ่น (Turbid urine)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="hematuria"><span>ปัสสาวะปนเลือด (Hematuria)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="frequency"><span>ปัสสาวะบ่อย (Frequency)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="urgency"><span>ปัสสาวะไม่สุด (Urgency)</span></label></div>
+      </div>
+
+      <div class="exact-note">
+        <strong>ในผู้สูงอายุอาการอาจไม่ชัดเจน เช่น อ่อนเพลีย เบื่ออาหาร ให้ซักประวัติเพิ่มเติมเกี่ยวกับการติดเชื้อทางเดินปัสสาวะ รวมถึงติดเชื้อในกระแสเลือด</strong>
       </div>
     </div>
 
     <div class="card hidden-print">
       <div class="section-title">
         <div>
-          <h2>2) Upper UTI / อาการรุนแรง</h2>
-          <div class="sub">ถ้ามีข้อใดข้อหนึ่ง ให้พิจารณาส่งต่อโรงพยาบาล</div>
+          <h2>Complicated UTIs / Alarm Sign</h2>
+          <div class="sub">ใช้ถ้อยคำตามแบบฟอร์มในเอกสาร</div>
         </div>
       </div>
-      <div class="grid grid-3">
-        <div class="box"><label><input type="checkbox" id="fever"><span>มีไข้</span></label></div>
-        <div class="box"><label><input type="checkbox" id="flankPain"><span>ปวดสีข้าง</span></label></div>
-        <div class="box"><label><input type="checkbox" id="cvaTenderness"><span>กดเจ็บบริเวณ Costovertebral angel</span></label></div>
+
+      <div class="grid grid-1">
+        <div class="box">
+          <label>
+            <input type="checkbox" id="noResponse72h">
+            <span>ไม่ตอบสนองต่อการรักษาที่เหมาะสมใน 72 ชั่วโมง ยาที่ได้รับก่อนหน้า <input class="inline-field" id="priorDrug" placeholder="ระบุยา"></span>
+          </label>
+        </div>
+
+        <div class="box">
+          <label>
+            <input type="checkbox" id="stoneOrObstruction">
+            <span>มีประวัติหรืออาการที่สงสัยนิ่วในไต หรือ มีการอุดกั้นทางเดินปัสสาวะ เช่น ปวดท้องน้อยเป็นพัก ๆ, กดบริเวณที่ปวดจะไม่เจ็บ</span>
+          </label>
+        </div>
+
+        <div class="box">
+          <label>
+            <input type="checkbox" id="underlyingDisease">
+            <span>
+              มีโรคประจำตัว เช่น เบาหวานที่คุมระดับน้ำตาลไม่ได้(ระดับน้ำตาล
+              <input class="inline-field" id="glucoseLevel" placeholder="mg/dL"> mg/dL),
+              ภูมิคุ้มกันบกพร่อง
+              <input class="inline-field" id="immuneDetail" placeholder="รายละเอียด">
+            </span>
+          </label>
+        </div>
+
+        <div class="box">
+          <label>
+            <input type="checkbox" id="recurrentLower">
+            <span>
+              ผู้ป่วยที่ติดเชื้อทางเดินปัสสาวะส่วนล่างซ้ำหลายครั้ง (> 2 ครั้งภายใน 6 เดือน/อย่างน้อย 3 ครั้งภายใน 1 ปี) จำนวน
+              <input class="inline-field" id="lowerRepeatCount" placeholder="ครั้ง"> ครั้ง
+            </span>
+          </label>
+        </div>
+
+        <div class="box">
+          <label>
+            <input type="checkbox" id="recurrentUpper">
+            <span>
+              มีการติดเชื้อทางเดินปัสสาวะส่วนบนซ้ำ จำนวน
+              <input class="inline-field" id="upperRepeatCount" placeholder="ครั้ง"> ครั้ง
+            </span>
+          </label>
+        </div>
+
+        <div class="box"><label><input type="checkbox" id="olderMaleFirstUti"><span>ชายสูงอายุที่มีการติดเชื้อทางเดินปัสสาวะครั้งแรก</span></label></div>
+        <div class="box"><label><input type="checkbox" id="pregnancyRisk"><span>หญิงตั้งครรภ์ที่มีความเสี่ยงข้างต้น</span></label></div>
+        <div class="box"><label><input type="checkbox" id="kidneyTransplant"><span>ผู้ปลูกถ่ายไตที่ไม่มีความเสี่ยงอื่น ๆ</span></label></div>
+        <div class="box"><label><input type="checkbox" id="postCatheter48h"><span>ผู้ที่มีอาการของ UTI หลังถอดสายสวนปัสสาวะไม่เกิน 48 ชั่วโมง</span></label></div>
       </div>
     </div>
 
     <div class="card hidden-print">
       <div class="section-title">
         <div>
-          <h2>3) Alarm sign / Complicated UTI</h2>
-          <div class="sub">ถ้ามีข้อใดข้อหนึ่ง ระบบจะแนะนำให้ส่งต่อ</div>
+          <h2>Treatment</h2>
+          <div class="sub">ข้อมูลช่วยจัดตัวเลือกยาและการส่งต่อ</div>
         </div>
       </div>
-      <div class="grid grid-2">
-        <div class="box"><label><input type="checkbox" id="noResponse72h"><span>ไม่ตอบสนองใน 72 ชั่วโมง / เคยได้รับยาก่อนหน้า</span></label></div>
-        <div class="box"><label><input type="checkbox" id="stoneOrObstruction"><span>สงสัยนิ่วหรือการอุดกั้นทางเดินปัสสาวะ</span></label></div>
-        <div class="box"><label><input type="checkbox" id="underlyingRisk"><span>มีโรคร่วมเสี่ยง เช่น คุมเบาหวานไม่ได้ / ภูมิคุ้มกันบกพร่อง</span></label></div>
-        <div class="box"><label><input type="checkbox" id="recurrentUti"><span>recurrent UTI</span></label></div>
-        <div class="box"><label><input type="checkbox" id="urinarySurgery"><span>มีประวัติผ่าตัดทางเดินปัสสาวะส่วนบน</span></label></div>
-        <div class="box"><label><input type="checkbox" id="olderMaleFirstUti"><span>ชายสูงอายุที่มี UTI ครั้งแรก</span></label></div>
-        <div class="box"><label><input type="checkbox" id="pregnancyRisk"><span>หญิงตั้งครรภ์ / สงสัยตั้งครรภ์</span></label></div>
-        <div class="box"><label><input type="checkbox" id="kidneyTransplant"><span>ผู้ป่วยปลูกถ่ายไต</span></label></div>
-        <div class="box"><label><input type="checkbox" id="postCatheter48h"><span>มีอาการหลังถอดสายสวนไม่เกิน 48 ชั่วโมง</span></label></div>
-      </div>
-    </div>
 
-    <div class="card hidden-print">
-      <div class="section-title">
-        <div>
-          <h2>4) ปัจจัยประกอบการเลือกยา</h2>
-        </div>
-      </div>
       <div class="grid grid-2">
         <div class="field">
           <label for="sex">เพศ</label>
@@ -577,36 +431,86 @@
             <option value="other">อื่น ๆ / ไม่ระบุ</option>
           </select>
         </div>
+
         <div class="field">
           <label for="age">อายุ (ปี)</label>
           <input type="number" id="age" min="0" placeholder="เช่น 32">
         </div>
+
         <div class="field">
           <label for="crcl">CrCl โดยประมาณ (mL/min)</label>
           <input type="number" id="crcl" min="0" step="0.1" placeholder="เว้นว่างได้">
         </div>
+
         <div class="field">
-          <label for="cultureAvailable">มีผล urine culture แล้วหรือไม่</label>
+          <label for="cultureAvailable">มีผล urine culture แล้วยืนยันว่าไวต่อยาหรือไม่</label>
           <select id="cultureAvailable">
             <option value="no">ยังไม่มี</option>
             <option value="yes">มีแล้ว</option>
           </select>
         </div>
+
         <div class="field" style="grid-column:1/-1">
           <label for="patientNote">บันทึกเพิ่มเติม</label>
-          <textarea id="patientNote" placeholder="เช่น แพ้ยา, ผู้สูงอายุ, มีโรคร่วม, เคยได้ยามาก่อน"></textarea>
+          <textarea id="patientNote" placeholder="เช่น แพ้ยา ประวัติการใช้ยาก่อนหน้า โรคร่วม หรือหมายเหตุที่ต้องการแนบในการ์ด/ใบส่งต่อ"></textarea>
         </div>
       </div>
-      <div class="note">
-        ระบบนี้ทำหน้าที่เป็นคู่มือช่วยคัดกรองจากเอกสารที่ให้มา ไม่แทนการวินิจฉัยหรือการใช้วิจารณญาณทางวิชาชีพ
+    </div>
+
+    <div class="card hidden-print">
+      <div class="section-title">
+        <div>
+          <h2>Upper UTIs</h2>
+          <div class="sub">อาการแสดง</div>
+        </div>
+      </div>
+
+      <div class="grid grid-3">
+        <div class="box"><label><input type="checkbox" id="fever"><span>มีไข้ (fever)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="flankPain"><span>ปวดบริเวณสีข้าง (flank pain)</span></label></div>
+        <div class="box"><label><input type="checkbox" id="cvaTenderness"><span>กดเจ็บบริเวณ costovertebral angle (CVA tenderness)</span></label></div>
+      </div>
+
+      <div class="exact-note">
+        ให้วินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย
+      </div>
+
+      <div class="note"><strong>Treatment:</strong> ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล</div>
+    </div>
+
+    <div class="card hidden-print">
+      <div class="grid grid-2">
+        <div>
+          <div class="section-title">
+            <div>
+              <h2>UTIs in pregnancy</h2>
+            </div>
+          </div>
+          <div class="exact-note">
+            แนะนำให้ส่ง urine culture เมื่อมีอาการและอาการแสดงของภาวะ cystitis หรือ pyelonephritis โดย urine culture ควรพบเชื้อก่อโรคทางเดินปัสสาวะ &gt;10<sup>5</sup> CFU/mL
+          </div>
+          <div class="note"><strong>Treatment:</strong> ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล</div>
+        </div>
+
+        <div>
+          <div class="section-title">
+            <div>
+              <h2>Catheter-associated UTIs</h2>
+            </div>
+          </div>
+          <div class="exact-note">
+            ผู้ป่วยแสดงอาการด้านการติดเชื้อทางเดินปัสสาวะ หลังการใส่สายสวน หรือ หลังถอดสายสวนไม่เกิน 48 ชั่วโมง อาจสังเกตจากปัสสาวะขุ่น หรือมีเลือดปนได้
+          </div>
+          <div class="note"><strong>Treatment:</strong> ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล</div>
+        </div>
       </div>
     </div>
 
     <div class="sticky hidden-print">
-      <div class="card" style="padding:10px;">
+      <div class="card" style="padding:10px">
         <div class="btn-row">
           <button class="btn-primary" onclick="evaluateCase()">สรุปผลและแนะนำยา</button>
-          <button class="btn-pink" onclick="generateAdviceCard()">สร้างการ์ดคำแนะนำ</button>
+          <button class="btn-pink" onclick="generateShareCard()">อัปเดตการ์ด/ใบส่งต่อ</button>
           <button class="btn-green" onclick="shareCardImage()">แชร์เป็นรูปภาพ</button>
           <button class="btn-gray" onclick="resetForm()">ล้างข้อมูล</button>
         </div>
@@ -616,8 +520,8 @@
     <div class="card hidden-print">
       <div class="section-title">
         <div>
-          <h2>5) ผลการประเมิน</h2>
-          <div class="sub">กด “เลือกยานี้” เพื่อใช้ทำการ์ดให้คนไข้</div>
+          <h2>ผลการประเมิน</h2>
+          <div class="sub">หากเป็น Acute uncomplicated cystitis ให้กด “เลือกใช้ในการ์ด” ใต้ตัวเลือกยา</div>
         </div>
       </div>
       <div id="resultArea" class="result warn">
@@ -626,11 +530,11 @@
       </div>
     </div>
 
-    <div id="printCardContainer" class="card">
+    <div id="shareStageCard" class="card">
       <div class="section-title hidden-print">
         <div>
-          <h2>6) การ์ดคำแนะนำคนไข้</h2>
-          <div class="sub">พิมพ์ / Save PDF / แชร์เป็นรูปภาพเข้า LINE ได้</div>
+          <h2>การ์ดคำแนะนำ / ใบส่งต่อ</h2>
+          <div class="sub">ระบบจะสร้างการ์ดคนไข้หรือใบส่งต่อให้เหมาะกับผลการประเมิน</div>
         </div>
         <div class="hidden-print">
           <div class="btn-row-3">
@@ -641,43 +545,89 @@
         </div>
       </div>
 
-      <div class="patient-card-wrap">
-        <div class="patient-card" id="patientCard">
-          <div class="pc-head">
-            <div>
-              <div class="pc-title">💗 การ์ดคำแนะนำสำหรับคนไข้</div>
-              <div class="note" id="pcStoreTop">กรุณาตั้งชื่อร้านยาใน Settings</div>
+      <div id="shareWrap" class="share-wrap">
+        <!-- Patient Advice Card -->
+        <div id="patientShell" class="card-shell active">
+          <div id="patientCard" class="share-card">
+            <div class="share-top">
+              <div class="share-title">💗 การ์ดคำแนะนำสำหรับคนไข้</div>
+              <div class="share-badge" id="patientBadge">คำแนะนำสุขภาพ</div>
             </div>
-            <div class="pc-badge" id="pcBadge">คำแนะนำสุขภาพ</div>
-          </div>
+            <div class="share-body">
+              <div class="share-box">
+                <h4>สรุปเบื้องต้น</h4>
+                <div id="patientSummary" class="small-meta">ยังไม่มีข้อมูล กรุณาประเมินเคสก่อน</div>
+              </div>
 
-          <div class="pc-section">
-            <h4>สรุปเบื้องต้น</h4>
-            <div id="pcSummary" class="empty">ยังไม่มีข้อมูล กรุณาประเมินเคสก่อน</div>
-          </div>
+              <div class="share-box">
+                <h4>ยาที่เลือก</h4>
+                <div id="patientDrug" class="small-meta">ยังไม่ได้เลือกยา</div>
+              </div>
 
-          <div class="pc-section">
-            <h4>ยาที่เลือก</h4>
-            <div id="pcDrug" class="empty">ยังไม่ได้เลือกยา</div>
-          </div>
+              <div class="share-box">
+                <h4>คำแนะนำสั้น ๆ</h4>
+                <ul id="patientAdviceList">
+                  <li>กรุณาประเมินเคสก่อน</li>
+                </ul>
+              </div>
 
-          <div class="pc-section">
-            <h4>วิธีใช้ / คำแนะนำ</h4>
-            <ul id="pcInstructions" class="pc-list">
-              <li>กรุณาประเมินเคสก่อน</li>
-            </ul>
+              <div class="share-box">
+                <h4>อาการที่ควรรีบไปโรงพยาบาล</h4>
+                <ul id="patientAlertList">
+                  <li>มีไข้สูง หนาวสั่น ปวดสีข้าง หรืออาการไม่ดีขึ้น</li>
+                </ul>
+              </div>
+            </div>
+            <div class="share-sign" id="patientSignature">
+              ด้วยความปรารถนาดีจากร้าน...<br>โดยเภสัชกร...
+            </div>
           </div>
+        </div>
 
-          <div class="pc-section">
-            <h4>อาการที่ควรรีบไปโรงพยาบาล</h4>
-            <ul id="pcAlerts" class="pc-list">
-              <li>มีไข้สูง หนาวสั่น ปวดสีข้าง หรืออาการไม่ดีขึ้น</li>
-            </ul>
-          </div>
+        <!-- Referral Card -->
+        <div id="referralShell" class="card-shell">
+          <div id="referralCard" class="share-card">
+            <div class="share-top">
+              <div class="formal-head">
+                <div>
+                  <div class="share-title">ใบส่งต่อเบื้องต้นจากร้านยา</div>
+                  <div class="small-meta" id="refStoreHead">ร้านยา ...</div>
+                </div>
+                <div class="formal-tag">ควรส่งต่อ</div>
+              </div>
+            </div>
 
-          <div class="signature" id="pcSignature">
-            ด้วยความปรารถนาดีจากร้าน...<br>
-            โดยเภสัชกร...
+            <div class="share-body">
+              <div class="share-box">
+                <h4>เรื่อง</h4>
+                <div id="refTopic" class="small-meta">ขอส่งต่อผู้ป่วยเพื่อประเมินและรักษาต่อ</div>
+              </div>
+
+              <div class="share-box">
+                <h4>ข้อมูลเบื้องต้นที่พบ</h4>
+                <ul id="refReasonList">
+                  <li>ยังไม่มีข้อมูล</li>
+                </ul>
+              </div>
+
+              <div class="share-box">
+                <h4>หมายเหตุเพิ่มเติม</h4>
+                <div id="refExtra" class="small-meta">-</div>
+              </div>
+
+              <div class="share-box">
+                <h4>ความเห็นจากร้านยา</h4>
+                <div class="small-meta">
+                  แนะนำส่งต่อเพื่อเข้ารับการประเมิน วินิจฉัย และพิจารณาการรักษาในโรงพยาบาล
+                </div>
+              </div>
+            </div>
+
+            <div class="share-sign" id="refSignature">
+              วันที่/เวลา: -<br>
+              ส่งต่อโดยร้าน ...<br>
+              เภสัชกร ...
+            </div>
           </div>
         </div>
       </div>
@@ -686,68 +636,67 @@
     <div class="card hidden-print">
       <div class="section-title">
         <div>
-          <h2>7) ตารางอ้างอิงขนาดยา</h2>
-          <div class="sub">อ้างอิงจากเอกสารที่ให้มา และใช้เป็นคู่มือประกอบการตัดสินใจ</div>
+          <h2>Drug in UTIs</h2>
         </div>
       </div>
-      <div style="overflow-x:auto;">
+      <div style="overflow-x:auto">
         <table class="ref-table">
           <thead>
             <tr>
               <th>ยา</th>
-              <th>ขนาดยา</th>
+              <th>ขนาด</th>
               <th>หมายเหตุ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Nitrofurantoin</td>
-              <td>100 mg PO QID x 5 วัน หรือ monohydrate/macrocrystal 100 mg PO BID</td>
-              <td>หลีกเลี่ยงหาก CrCl &lt; 30 mL/min</td>
+              <td>Nitrofurantoin microcrystal</td>
+              <td>100 mg PO QID</td>
+              <td>กิน 5 วัน<br>*First-line therapy</td>
             </tr>
             <tr>
-              <td>Fosfomycin trometamol</td>
+              <td>Nitrofurantoin monohydrate/macrocrystal (75/25)</td>
+              <td>100 mg PO BID</td>
+              <td>ยาผสม monohydrate/macrocrystal ระคายเคืองทางเดินอาหารน้อยกว่าและออกฤทธิ์ยาวกว่า รูป microcrystal จึงสามารถบริหารยาวันละ 2 ครั้งได้</td>
+            </tr>
+            <tr>
+              <td>Fosfomycin trometamol (oral)</td>
               <td>3 g PO single dose</td>
-              <td>หลีกเลี่ยงหาก CrCl &lt; 10 mL/min</td>
-            </tr>
-            <tr>
-              <td>Cefixime</td>
-              <td>400 mg PO OD หรือ BID x 7 วัน</td>
-              <td>Oral 3rd generation cephalosporin</td>
+              <td>กรณี recurrent cystitis: 3 g PO for 2 doses (3 days apart)</td>
             </tr>
             <tr>
               <td>Amoxicillin/clavulanic acid</td>
-              <td>1 g PO BID x 7 วัน</td>
-              <td>ตัวเลือกใน acute uncomplicated cystitis</td>
+              <td>1 g PO BID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Amoxicillin</td>
+              <td>500 mg PO BID</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>Cefixime</td>
+              <td>400 mg PO OD หรือ BID</td>
+              <td></td>
             </tr>
             <tr>
               <td>Ciprofloxacin</td>
-              <td>500 mg PO BID x 3 วัน</td>
-              <td>ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา</td>
+              <td>500 mg PO BID</td>
+              <td rowspan="3">แนะนำเฉพาะกรณี urine culture ยืนยันว่าเชื้อไวต่อยา เนื่องจากแนวโน้มดื้อต่อยาเหล่านี้สูง</td>
             </tr>
             <tr>
               <td>Levofloxacin</td>
-              <td>500 mg PO OD x 3 วัน</td>
-              <td>ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา</td>
+              <td>500 mg PO OD</td>
             </tr>
             <tr>
               <td>Trimethoprim/sulfamethoxazole</td>
-              <td>Single strength(80/400) 2 tabs PO BID x 3 วัน</td>
-              <td>ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา</td>
+              <td>Single strength (80/400 mg) 2 tabs PO BID</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-
-  <!-- จุดที่ 2: ปุ่มติดตั้ง PWA -->
-  <button id="install-btn" class="hidden-print">
-      <svg viewBox="0 0 24 24">
-          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
-      </svg>
-      ติดตั้งแอป
-  </button>
 
   <script>
     let lastEvaluation = null;
@@ -757,57 +706,20 @@
     document.addEventListener('DOMContentLoaded', function () {
       loadSettings();
       autoBindSettings();
-      refreshSignature();
+      refreshSignatures();
       previewGreeting();
+      generateShareCard();
     });
-
-    // =========================================
-    // จุดที่ 3: โค้ด JavaScript สำหรับ PWA
-    // =========================================
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        if (window.location.protocol === 'https:' || window.location.protocol === 'http:') {
-          navigator.serviceWorker.register('sw.js')
-            .then(reg => console.log('Service Worker Registered!', reg.scope))
-            .catch(err => console.log('SW Error:', err.message));
-        }
-      });
-    }
-
-    let deferredPrompt;
-    const installBtn = document.getElementById('install-btn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-      installBtn.style.display = 'flex';
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log('Install outcome:', outcome);
-        deferredPrompt = null;
-        installBtn.style.display = 'none';
-      }
-    });
-
-    window.addEventListener('appinstalled', () => {
-      installBtn.style.display = 'none';
-    });
-    // =========================================
 
     function autoBindSettings() {
       document.getElementById('storeName').addEventListener('input', function () {
         localStorage.setItem('uti_store_name', this.value.trim());
-        refreshSignature();
+        refreshSignatures();
         previewGreeting();
       });
-
       document.getElementById('pharmacistName').addEventListener('input', function () {
         localStorage.setItem('uti_pharmacist_name', this.value.trim());
-        refreshSignature();
+        refreshSignatures();
         previewGreeting();
       });
     }
@@ -815,7 +727,7 @@
     function saveSettings() {
       localStorage.setItem('uti_store_name', document.getElementById('storeName').value.trim());
       localStorage.setItem('uti_pharmacist_name', document.getElementById('pharmacistName').value.trim());
-      refreshSignature();
+      refreshSignatures();
       previewGreeting();
       alert('บันทึก Settings เรียบร้อย');
     }
@@ -823,7 +735,7 @@
     function loadSettings() {
       document.getElementById('storeName').value = localStorage.getItem('uti_store_name') || '';
       document.getElementById('pharmacistName').value = localStorage.getItem('uti_pharmacist_name') || '';
-      refreshSignature();
+      refreshSignatures();
       previewGreeting();
     }
 
@@ -832,29 +744,49 @@
       localStorage.removeItem('uti_pharmacist_name');
       document.getElementById('storeName').value = '';
       document.getElementById('pharmacistName').value = '';
-      refreshSignature();
+      refreshSignatures();
       previewGreeting();
       alert('ล้าง Settings แล้ว');
     }
 
     function previewGreeting() {
-      const store = document.getElementById('storeName').value.trim() || '...';
-      const phar = document.getElementById('pharmacistName').value.trim() || '...';
+      const store = getStoreName() || '...';
+      const phar = getPharmacistName() || '...';
       document.getElementById('greetingPreview').innerHTML =
         'ข้อความท้ายการ์ด: <strong>ด้วยความปรารถนาดีจากร้าน ' + escapeHtml(store) +
         '</strong> โดยเภสัชกร <strong>' + escapeHtml(phar) + '</strong>';
     }
 
-    function refreshSignature() {
-      const store = document.getElementById('storeName').value.trim() || localStorage.getItem('uti_store_name') || '...';
-      const phar = document.getElementById('pharmacistName').value.trim() || localStorage.getItem('uti_pharmacist_name') || '...';
+    function getStoreName() {
+      return document.getElementById('storeName').value.trim() || localStorage.getItem('uti_store_name') || '';
+    }
 
-      document.getElementById('pcSignature').innerHTML =
+    function getPharmacistName() {
+      return document.getElementById('pharmacistName').value.trim() || localStorage.getItem('uti_pharmacist_name') || '';
+    }
+
+    function refreshSignatures() {
+      const store = getStoreName() || '...';
+      const phar = getPharmacistName() || '...';
+
+      document.getElementById('patientSignature').innerHTML =
         'ด้วยความปรารถนาดีจากร้าน <strong>' + escapeHtml(store) + '</strong><br>โดยเภสัชกร <strong>' + escapeHtml(phar) + '</strong>';
 
-      document.getElementById('pcStoreTop').innerHTML =
-        'ร้านยา: <strong>' + escapeHtml(store) + '</strong>' +
-        '<span class="small-capsule">เภสัชกร ' + escapeHtml(phar) + '</span>';
+      document.getElementById('refStoreHead').innerHTML = 'ร้านยา ' + escapeHtml(store);
+
+      const now = new Date();
+      const thaiNow = now.toLocaleString('th-TH', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+
+      document.getElementById('refSignature').innerHTML =
+        'วันที่/เวลา: ' + escapeHtml(thaiNow) + '<br>' +
+        'ส่งต่อโดยร้าน <strong>' + escapeHtml(store) + '</strong><br>' +
+        'เภสัชกร <strong>' + escapeHtml(phar) + '</strong>';
     }
 
     function getChecked(id) {
@@ -862,57 +794,83 @@
     }
 
     function getValue(id) {
-      return document.getElementById(id).value;
+      return document.getElementById(id).value.trim();
     }
 
     function collectData() {
       const lowerSymptoms = [
-        { id: 'dysuria', label: 'ปัสสาวะแสบขัด' },
-        { id: 'suprapubicPain', label: 'ปวด/กดเจ็บบริเวณหัวหน่าว' },
-        { id: 'turbidUrine', label: 'ปัสสาวะขุ่น' },
-        { id: 'hematuria', label: 'ปัสสาวะปนเลือด' },
-        { id: 'frequency', label: 'ปัสสาวะบ่อย' },
-        { id: 'urgency', label: 'ปวดปัสสาวะทันที/ปัสสาวะไม่สุด' }
+        { id: 'dysuria', label: 'ปัสสาวะแสบขัด (Dysuria)' },
+        { id: 'suprapubicPain', label: 'ปวดหรือกดเจ็บบริเวณหัวหน่าว (suprapubic pain/tenderness)' },
+        { id: 'turbidUrine', label: 'ปัสสาวะขุ่น (Turbid urine)' },
+        { id: 'hematuria', label: 'ปัสสาวะปนเลือด (Hematuria)' },
+        { id: 'frequency', label: 'ปัสสาวะบ่อย (Frequency)' },
+        { id: 'urgency', label: 'ปัสสาวะไม่สุด (Urgency)' }
       ];
 
       const upperSymptoms = [
-        { id: 'fever', label: 'มีไข้' },
-        { id: 'flankPain', label: 'ปวดสีข้าง' },
-        { id: 'cvaTenderness', label: 'CVA tenderness' }
+        { id: 'fever', label: 'มีไข้ (fever)' },
+        { id: 'flankPain', label: 'ปวดบริเวณสีข้าง (flank pain)' },
+        { id: 'cvaTenderness', label: 'กดเจ็บบริเวณ costovertebral angle (CVA tenderness)' }
       ];
 
-      const complicatedFlags = [
-        { id: 'noResponse72h', label: 'ไม่ตอบสนองใน 72 ชั่วโมง / เคยได้รับยาก่อนหน้า' },
-        { id: 'stoneOrObstruction', label: 'สงสัยนิ่วหรือการอุดกั้นทางเดินปัสสาวะ' },
-        { id: 'underlyingRisk', label: 'มีโรคร่วมเสี่ยง' },
-        { id: 'recurrentUti', label: 'recurrent UTI' },
-        { id: 'urinarySurgery', label: 'มีประวัติผ่าตัดทางเดินปัสสาวะส่วนบน' },
-        { id: 'olderMaleFirstUti', label: 'ชายสูงอายุที่มี UTI ครั้งแรก' },
-        { id: 'pregnancyRisk', label: 'หญิงตั้งครรภ์ / สงสัยตั้งครรภ์' },
-        { id: 'kidneyTransplant', label: 'ผู้ป่วยปลูกถ่ายไต' },
-        { id: 'postCatheter48h', label: 'มีอาการหลังถอดสายสวนไม่เกิน 48 ชั่วโมง' }
-      ];
+      const flags = [];
+
+      if (getChecked('noResponse72h')) {
+        flags.push('ไม่ตอบสนองต่อการรักษาที่เหมาะสมใน 72 ชั่วโมง ยาที่ได้รับก่อนหน้า ' + (getValue('priorDrug') || '-'));
+      }
+
+      if (getChecked('stoneOrObstruction')) {
+        flags.push('มีประวัติหรืออาการที่สงสัยนิ่วในไต หรือ มีการอุดกั้นทางเดินปัสสาวะ เช่น ปวดท้องน้อยเป็นพัก ๆ, กดบริเวณที่ปวดจะไม่เจ็บ');
+      }
+
+      if (getChecked('underlyingDisease')) {
+        const glucose = getValue('glucoseLevel') || '-';
+        const immune = getValue('immuneDetail') || '-';
+        flags.push('มีโรคประจำตัว เช่น เบาหวานที่คุมระดับน้ำตาลไม่ได้(ระดับน้ำตาล ' + glucose + ' mg/dL), ภูมิคุ้มกันบกพร่อง ' + immune);
+      }
+
+      if (getChecked('recurrentLower')) {
+        flags.push('ผู้ป่วยที่ติดเชื้อทางเดินปัสสาวะส่วนล่างซ้ำหลายครั้ง (> 2 ครั้งภายใน 6 เดือน/อย่างน้อย 3 ครั้งภายใน 1 ปี) จำนวน ' + (getValue('lowerRepeatCount') || '-') + ' ครั้ง');
+      }
+
+      if (getChecked('recurrentUpper')) {
+        flags.push('มีการติดเชื้อทางเดินปัสสาวะส่วนบนซ้ำ จำนวน ' + (getValue('upperRepeatCount') || '-') + ' ครั้ง');
+      }
+
+      if (getChecked('olderMaleFirstUti')) {
+        flags.push('ชายสูงอายุที่มีการติดเชื้อทางเดินปัสสาวะครั้งแรก');
+      }
+
+      if (getChecked('pregnancyRisk')) {
+        flags.push('หญิงตั้งครรภ์ที่มีความเสี่ยงข้างต้น');
+      }
+
+      if (getChecked('kidneyTransplant')) {
+        flags.push('ผู้ปลูกถ่ายไตที่ไม่มีความเสี่ยงอื่น ๆ');
+      }
+
+      if (getChecked('postCatheter48h')) {
+        flags.push('ผู้ที่มีอาการของ UTI หลังถอดสายสวนปัสสาวะไม่เกิน 48 ชั่วโมง');
+      }
 
       return {
         sex: getValue('sex'),
-        age: Number(getValue('age')) || '',
+        age: getValue('age'),
         crcl: getValue('crcl') === '' ? '' : Number(getValue('crcl')),
         cultureAvailable: getValue('cultureAvailable'),
-        patientNote: getValue('patientNote').trim(),
-        lowerSymptoms: lowerSymptoms.filter(x => getChecked(x.id)),
-        upperSymptoms: upperSymptoms.filter(x => getChecked(x.id)),
-        complicatedFlags: complicatedFlags.filter(x => getChecked(x.id))
+        patientNote: getValue('patientNote'),
+        lowerSymptoms: lowerSymptoms.filter(x => getChecked(x.id)).map(x => x.label),
+        upperSymptoms: upperSymptoms.filter(x => getChecked(x.id)).map(x => x.label),
+        flags: flags,
+        rawFlags: {
+          pregnancyRisk: getChecked('pregnancyRisk'),
+          postCatheter48h: getChecked('postCatheter48h')
+        }
       };
     }
 
     function evaluateCase() {
       const data = collectData();
-      const lowerCount = data.lowerSymptoms.length;
-      const upperCount = data.upperSymptoms.length;
-      const complicatedCount = data.complicatedFlags.length;
-      const isPregnant = data.complicatedFlags.some(x => x.id === 'pregnancyRisk');
-      const isPostCatheter = data.complicatedFlags.some(x => x.id === 'postCatheter48h');
-
       selectedDrug = null;
       currentDrugList = [];
 
@@ -920,76 +878,68 @@
         tag: 'ต้องประเมินเพิ่มเติม',
         tagClass: 'pill-orange',
         boxClass: 'warn',
-        title: 'ข้อมูลยังไม่เข้าเกณฑ์ชัดเจน',
-        summary: 'ข้อมูลยังไม่พอสำหรับจัดเข้ากลุ่ม lower uncomplicated UTI',
+        title: 'ยังไม่เข้าเกณฑ์ชัดเจน',
+        summary: 'ข้อมูลยังไม่เพียงพอสำหรับจัดเข้ากลุ่มตามแบบฟอร์ม',
         reasons: [],
-        actions: ['ซักประวัติเพิ่ม และประเมินอาการซ้ำ'],
+        actions: ['ซักประวัติเพิ่มเติมและประเมินอาการซ้ำ'],
         drugs: [],
-        note: 'เครื่องมือนี้เป็นคู่มือช่วยคัดกรองจาก checklist'
+        referral: false,
+        note: 'เครื่องมือนี้เป็นคู่มือช่วยคัดกรองและจัดรูปแบบคำแนะนำจากเอกสาร'
       };
 
-      if (upperCount > 0) {
+      if (data.upperSymptoms.length > 0) {
         result = {
           tag: 'ส่งต่อโรงพยาบาล',
           tagClass: 'pill-red',
           boxClass: 'danger',
-          title: 'Upper UTI / ภาวะรุนแรง',
-          summary: 'พบอาการที่เข้ากับ upper UTI หรือภาวะที่ไม่ควรจัดการเองหน้าร้าน',
-          reasons: data.upperSymptoms.map(x => x.label),
-          actions: [
-            'แนะนำส่งต่อโรงพยาบาล',
-            'พิจารณา urinalysis และ urine culture',
-            'หากมีอาการมาก ให้รีบไปโรงพยาบาลทันที'
-          ],
+          title: 'Upper UTIs',
+          summary: 'ให้วินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย',
+          reasons: data.upperSymptoms,
+          actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
-          note: 'กรณีนี้ควรส่งต่อ'
+          referral: true,
+          note: 'Upper UTIs'
         };
-      } else if (isPregnant) {
+      } else if (data.rawFlags.pregnancyRisk) {
         result = {
           tag: 'ส่งต่อโรงพยาบาล',
           tagClass: 'pill-red',
           boxClass: 'danger',
-          title: 'UTI in pregnancy',
-          summary: 'หญิงตั้งครรภ์หรือสงสัยตั้งครรภ์ควรได้รับการประเมินที่โรงพยาบาล',
-          reasons: ['หญิงตั้งครรภ์ / สงสัยตั้งครรภ์'],
-          actions: [
-            'ส่งต่อโรงพยาบาล',
-            'แนะนำตรวจ urine culture ตามความเหมาะสม'
-          ],
+          title: 'UTIs in pregnancy',
+          summary: 'แนะนำให้ส่ง urine culture เมื่อมีอาการและอาการแสดงของภาวะ cystitis หรือ pyelonephritis โดย urine culture ควรพบเชื้อก่อโรคทางเดินปัสสาวะ >10^5 CFU/mL',
+          reasons: ['หญิงตั้งครรภ์ที่มีความเสี่ยงข้างต้น'],
+          actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
-          note: 'กรณี pregnancy-associated UTI ควรส่งต่อ'
+          referral: true,
+          note: 'UTIs in pregnancy'
         };
-      } else if (isPostCatheter) {
+      } else if (data.rawFlags.postCatheter48h) {
         result = {
           tag: 'ส่งต่อโรงพยาบาล',
           tagClass: 'pill-red',
           boxClass: 'danger',
-          title: 'Catheter-associated UTI',
-          summary: 'มีอาการสัมพันธ์กับสายสวนปัสสาวะ/หลังถอดสายสวน',
-          reasons: ['มีอาการหลังใส่หรือถอดสายสวนไม่เกิน 48 ชั่วโมง'],
-          actions: [
-            'ส่งต่อโรงพยาบาล',
-            'ประเมินเพิ่มเติมตามความรุนแรง'
-          ],
+          title: 'Catheter-associated UTIs',
+          summary: 'ผู้ป่วยแสดงอาการด้านการติดเชื้อทางเดินปัสสาวะ หลังการใส่สายสวน หรือ หลังถอดสายสวนไม่เกิน 48 ชั่วโมง อาจสังเกตจากปัสสาวะขุ่น หรือมีเลือดปนได้',
+          reasons: ['ผู้ที่มีอาการของ UTI หลังถอดสายสวนปัสสาวะไม่เกิน 48 ชั่วโมง'],
+          actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
-          note: 'กรณี catheter-associated UTI ควรส่งต่อ'
+          referral: true,
+          note: 'Catheter-associated UTIs'
         };
-      } else if (complicatedCount > 0) {
+      } else if (data.flags.length > 0) {
         result = {
           tag: 'ส่งต่อโรงพยาบาล',
           tagClass: 'pill-red',
           boxClass: 'danger',
-          title: 'Complicated UTI / Alarm sign',
-          summary: 'พบปัจจัยเสี่ยงหรือสัญญาณเตือนที่ไม่เหมาะกับการดูแลแบบ uncomplicated cystitis',
-          reasons: data.complicatedFlags.map(x => x.label),
-          actions: [
-            'ส่งต่อโรงพยาบาล',
-            'ทบทวนประวัติการได้รับยาก่อนหน้า และความเสี่ยงเชื้อดื้อยา'
-          ],
+          title: 'Acute Complicated UTIs',
+          summary: 'พบข้อเข้าได้กับ Complicated UTIs / Alarm Sign',
+          reasons: data.flags,
+          actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
-          note: 'กรณีนี้ไม่ควรเลือกยาเองหน้าร้าน'
+          referral: true,
+          note: 'Acute Complicated UTIs'
         };
-      } else if (lowerCount > 0) {
+      } else if (data.lowerSymptoms.length > 0) {
         const crcl = data.crcl;
         const cultureYes = data.cultureAvailable === 'yes';
         const drugs = [];
@@ -997,104 +947,111 @@
         if (crcl === '' || crcl >= 30) {
           drugs.push({
             name: 'Nitrofurantoin',
-            dose: '100 mg รับประทานวันละ 4 ครั้ง นาน 5 วัน หรือสูตร monohydrate/macrocrystal 100 mg วันละ 2 ครั้ง',
-            shortDose: '100 mg ตามสูตรที่เหมาะสม นาน 5 วัน',
-            status: 'first-line ตามเอกสาร',
-            note: 'หลีกเลี่ยงหาก CrCl < 30 mL/min',
+            label: 'Nitrofurantoin 5 วัน',
+            dose: 'Nitrofurantoin 5 วัน',
+            shortDose: 'Nitrofurantoin 5 วัน',
+            status: 'หลีกเลี่ยงหาก CrCl < 30 mL/min',
+            note: 'First-line therapy',
             instruction: [
-              'รับประทานตามขนาดและระยะเวลาที่กำหนดจนครบ',
+              'รับประทานยาให้ครบตามระยะเวลาที่แนะนำ',
               'ดื่มน้ำให้เพียงพอ',
-              'หากมีอาการคลื่นไส้ ให้รับประทานพร้อมอาหารได้'
+              'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
             ]
           });
         }
 
         if (crcl === '' || crcl >= 10) {
           drugs.push({
-            name: 'Fosfomycin trometamol',
-            dose: '3 g รับประทานครั้งเดียว',
-            shortDose: '3 g ครั้งเดียว',
-            status: 'ตัวเลือกได้',
-            note: 'หลีกเลี่ยงหาก CrCl < 10 mL/min',
+            name: 'Fosfomycin',
+            label: 'Fosfomycin single dose',
+            dose: 'Fosfomycin single dose',
+            shortDose: 'Fosfomycin single dose',
+            status: 'หลีกเลี่ยงหาก CrCl < 10 mL/min',
+            note: '',
             instruction: [
               'รับประทานครั้งเดียวตามคำแนะนำ',
               'ดื่มน้ำให้เพียงพอ',
-              'หากอาการไม่ดีขึ้นภายใน 48-72 ชั่วโมง ควรกลับมาประเมินซ้ำ'
+              'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
             ]
           });
         }
 
         drugs.push({
-          name: 'Cefixime',
-          dose: '400 mg วันละครั้ง หรือแบ่งตามความเหมาะสม นาน 7 วัน',
-          shortDose: '400 mg นาน 7 วัน',
-          status: 'oral 3rd generation cephalosporin',
-          note: 'ตัวเลือกใน acute uncomplicated cystitis',
+          name: 'Oral thrid generation cephalosporin เช่น cefixime',
+          label: 'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
+          dose: 'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
+          shortDose: 'cefixime กิน 7 วัน',
+          status: '',
+          note: '',
           instruction: [
-            'รับประทานต่อเนื่องให้ครบตามวัน',
-            'หากมีผื่น คัน หายใจลำบาก ให้หยุดยาและพบแพทย์ทันที'
+            'รับประทานยาให้ครบ 7 วัน',
+            'ถ้ามีผื่น คัน หรือหายใจลำบาก ให้หยุดยาและไปโรงพยาบาล',
+            'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
           ]
         });
 
         drugs.push({
           name: 'Amoxicillin/clavulanic acid',
-          dose: '1 g วันละ 2 ครั้ง นาน 7 วัน',
-          shortDose: '1 g วันละ 2 ครั้ง นาน 7 วัน',
-          status: 'ตัวเลือกได้',
-          note: 'ระบุในเอกสาร',
+          label: 'Amoxicillin/clavulanic acid กิน 7 วัน',
+          dose: 'Amoxicillin/clavulanic acid กิน 7 วัน',
+          shortDose: 'Amoxicillin/clavulanic acid กิน 7 วัน',
+          status: '',
+          note: '',
           instruction: [
-            'รับประทานพร้อมอาหารเพื่อลดการระคายเคืองทางเดินอาหาร',
-            'รับประทานต่อเนื่องให้ครบ'
+            'รับประทานยาให้ครบ 7 วัน',
+            'รับประทานพร้อมอาหารได้',
+            'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
           ]
         });
 
         if (cultureYes) {
           drugs.push({
-            name: 'Culture-directed options',
-            dose: 'Ciprofloxacin 500 mg วันละ 2 ครั้ง 3 วัน หรือ Levofloxacin 500 mg วันละครั้ง 3 วัน หรือ TMP/SMX SS 2 เม็ด วันละ 2 ครั้ง 3 วัน',
-            shortDose: 'ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา',
-            status: 'ใช้เมื่อเชื้อไวต่อยา',
-            note: 'ไม่ใช่ตัวเลือกนำเมื่อยังไม่มี culture',
+            name: 'Culture-directed',
+            label: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน',
+            dose: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน',
+            shortDose: 'ใช้ตามผล urine culture',
+            status: '',
+            note: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา',
             instruction: [
-              'ใช้ตามผลความไวของเชื้อ',
-              'ควรทบทวนความเสี่ยงเชื้อดื้อยาก่อนใช้'
+              'ใช้ตามผล urine culture',
+              'ทบทวนความเสี่ยงเชื้อดื้อยาก่อนใช้',
+              'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
             ]
           });
         }
 
         result = {
-          tag: 'เลือกยาได้หน้าร้าน',
+          tag: 'เลือกยาได้',
           tagClass: 'pill-green',
           boxClass: 'success',
           title: 'Acute uncomplicated cystitis',
-          summary: 'เข้าได้กับ lower UTI และยังไม่พบ red flag ที่ต้องส่งต่อจากข้อมูลที่กรอก',
-          reasons: data.lowerSymptoms.map(x => x.label),
+          summary: 'Lower UTIs โดยไม่พบ Upper UTIs หรือ Complicated UTIs / Alarm Sign จากข้อมูลที่กรอก',
+          reasons: data.lowerSymptoms,
           actions: [
-            'เลือกยาที่เหมาะสมด้านล่าง',
-            'ตรวจสอบประวัติแพ้ยาและข้อห้ามใช้ทุกครั้ง',
-            'หากไม่ดีขึ้นภายใน 72 ชั่วโมง หรือมีไข้/ปวดสีข้าง ให้ส่งต่อโรงพยาบาล'
+            'Treatment:',
+            'Nitrofurantoin 5 วัน หลีกเลี่ยงหาก CrCl < 30 mL/min',
+            'Fosfomycin single dose หลีกเลี่ยงหาก CrCl < 10 mL/min',
+            'Oral thrid generation cephalosporin เช่น cefixime กิน 7 วัน',
+            'Amoxicillin/clavulanic acid กิน 7 วัน',
+            'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน'
           ],
           drugs: drugs,
-          note: cultureYes
-            ? 'มีผล culture แล้ว จึงแสดงตัวเลือกตามความไวเชื้อได้'
-            : 'ยังไม่มี culture จึงยังไม่ใช้ยากลุ่ม culture-directed เป็นตัวเลือกนำ'
+          referral: false,
+          note: 'Acute uncomplicated cystitis'
         };
       }
 
       lastEvaluation = {
+        ...data,
         caseType: result.title,
         summary: result.summary,
         reasons: result.reasons,
-        symptoms: data.lowerSymptoms.map(x => x.label).concat(data.upperSymptoms.map(x => x.label)),
-        specialConditions: data.complicatedFlags.map(x => x.label),
-        crcl: data.crcl,
-        cultureAvailable: data.cultureAvailable,
-        recommendation: result.actions,
-        userNote: data.patientNote
+        actions: result.actions,
+        referral: result.referral
       };
 
       renderResult(result);
-      generateAdviceCard();
+      generateShareCard();
     }
 
     function renderResult(result) {
@@ -1106,7 +1063,7 @@
       html += '<div style="margin-top:8px;font-weight:700;">' + escapeHtml(result.summary) + '</div>';
 
       if (result.reasons && result.reasons.length) {
-        html += '<div style="margin-top:10px;"><strong>เหตุผลที่จัดเข้ากลุ่มนี้</strong><ul class="list">';
+        html += '<div style="margin-top:10px;"><strong>รายการที่พบ</strong><ul class="list">';
         result.reasons.forEach(function(item){
           html += '<li>' + escapeHtml(item) + '</li>';
         });
@@ -1125,13 +1082,13 @@
         html += '<div style="margin-top:12px;"><strong>ตัวเลือกยา</strong>';
         result.drugs.forEach(function(drug, idx){
           html += '<div class="drug-card">';
-          html += '<h4>💊 ' + escapeHtml(drug.name) + '</h4>';
-          html += '<div><strong>ขนาดยา:</strong> ' + escapeHtml(drug.dose) + '</div>';
+          html += '<h4>💊 ' + escapeHtml(drug.label) + '</h4>';
+          html += '<div><strong>คำอธิบาย:</strong> ' + escapeHtml(drug.dose) + '</div>';
           html += '<div class="drug-meta">';
-          html += '<div><strong>สถานะ:</strong> ' + escapeHtml(drug.status) + '</div>';
-          html += '<div><strong>หมายเหตุ:</strong> ' + escapeHtml(drug.note) + '</div>';
+          html += '<div><strong>ข้อควรระวัง:</strong> ' + escapeHtml(drug.status || '-') + '</div>';
+          html += '<div><strong>หมายเหตุ:</strong> ' + escapeHtml(drug.note || '-') + '</div>';
           html += '</div>';
-          html += '<button class="mini-btn" onclick="selectDrug(' + idx + ')">เลือกยานี้ทำการ์ดคนไข้</button>';
+          html += '<button class="mini-btn" onclick="selectDrug(' + idx + ')">เลือกใช้ในการ์ด</button>';
           html += '</div>';
         });
         html += '</div>';
@@ -1145,83 +1102,102 @@
     }
 
     function selectDrug(index) {
-      if (!currentDrugList || !currentDrugList[index]) return;
+      if (!currentDrugList[index]) return;
       selectedDrug = currentDrugList[index];
-      generateAdviceCard();
-      alert('เลือกยาเรียบร้อยแล้ว ระบบอัปเดตการ์ดคำแนะนำให้แล้ว');
-      document.getElementById('printCardContainer').scrollIntoView({ behavior: 'smooth' });
+      generateShareCard();
+      alert('เลือกยาเรียบร้อยแล้ว');
+      document.getElementById('shareStageCard').scrollIntoView({ behavior:'smooth' });
     }
 
-    function generateAdviceCard() {
-      refreshSignature();
+    function showPatientCard() {
+      document.getElementById('patientShell').classList.add('active');
+      document.getElementById('referralShell').classList.remove('active');
+    }
 
-      const badge = document.getElementById('pcBadge');
-      const summary = document.getElementById('pcSummary');
-      const drug = document.getElementById('pcDrug');
-      const instructions = document.getElementById('pcInstructions');
-      const alerts = document.getElementById('pcAlerts');
+    function showReferralCard() {
+      document.getElementById('referralShell').classList.add('active');
+      document.getElementById('patientShell').classList.remove('active');
+    }
+
+    function generateShareCard() {
+      refreshSignatures();
 
       if (!lastEvaluation) {
-        badge.innerText = 'คำแนะนำสุขภาพ';
-        summary.innerHTML = 'ยังไม่มีข้อมูล กรุณาประเมินเคสก่อน';
-        drug.innerHTML = 'ยังไม่ได้เลือกยา';
-        instructions.innerHTML = '<li>กรุณาประเมินเคสก่อน</li>';
-        alerts.innerHTML = '<li>มีไข้สูง หนาวสั่น ปวดสีข้าง หรืออาการไม่ดีขึ้น</li>';
+        showPatientCard();
+        document.getElementById('patientBadge').innerText = 'คำแนะนำสุขภาพ';
+        document.getElementById('patientSummary').innerHTML = 'ยังไม่มีข้อมูล กรุณาประเมินเคสก่อน';
+        document.getElementById('patientDrug').innerHTML = 'ยังไม่ได้เลือกยา';
+        document.getElementById('patientAdviceList').innerHTML = '<li>กรุณาประเมินเคสก่อน</li>';
+        document.getElementById('patientAlertList').innerHTML = '<li>มีไข้สูง หนาวสั่น ปวดสีข้าง หรืออาการไม่ดีขึ้น</li>';
         return;
       }
 
-      const isReferral = /Upper UTI|pregnancy|Catheter|Complicated|Alarm/.test(lastEvaluation.caseType);
+      if (lastEvaluation.referral) {
+        showReferralCard();
 
-      if (isReferral) {
-        badge.innerText = 'ควรไปโรงพยาบาล';
-        summary.innerHTML = escapeHtml(lastEvaluation.summary);
-        drug.innerHTML = 'กรณีนี้ไม่แนะนำให้เลือกยารับประทานเอง ควรส่งต่อโรงพยาบาล';
-        instructions.innerHTML = [
-          'แนะนำไปโรงพยาบาลเพื่อประเมินเพิ่มเติม',
-          'หากมีไข้ หนาวสั่น ปวดสีข้าง หรืออาการมากขึ้น ให้รีบไปทันที',
-          'ควรนำประวัติยาที่ใช้อยู่และประวัติแพ้ยาไปด้วย'
-        ].map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+        document.getElementById('refTopic').innerHTML =
+          '<strong>' + escapeHtml(lastEvaluation.caseType) + '</strong><br>ขอส่งต่อผู้ป่วยเพื่อประเมินและรักษาต่อ';
+
+        const reasons = []
+          .concat(lastEvaluation.upperSymptoms || [])
+          .concat(lastEvaluation.flags || [])
+          .slice(0, 5);
+
+        document.getElementById('refReasonList').innerHTML =
+          (reasons.length ? reasons : ['เข้าข่ายควรส่งต่อเพื่อประเมินเพิ่มเติม'])
+          .map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+
+        let extra = [];
+        if (lastEvaluation.lowerSymptoms && lastEvaluation.lowerSymptoms.length) {
+          extra.push('อาการแสดง Lower UTIs: ' + lastEvaluation.lowerSymptoms.join(', '));
+        }
+        if (lastEvaluation.patientNote) {
+          extra.push('บันทึกเพิ่มเติม: ' + lastEvaluation.patientNote);
+        }
+        document.getElementById('refExtra').innerHTML = escapeHtml(extra.join(' | ') || '-');
       } else {
-        badge.innerText = 'ดูแลต่อเนื่องได้';
-        summary.innerHTML = escapeHtml(lastEvaluation.summary);
+        showPatientCard();
+
+        document.getElementById('patientBadge').innerText = 'ดูแลต่อเนื่องได้';
+        document.getElementById('patientSummary').innerHTML = escapeHtml(lastEvaluation.summary);
 
         if (selectedDrug) {
-          drug.innerHTML =
-            '<strong>' + escapeHtml(selectedDrug.name) + '</strong><br>' +
-            'ขนาดยา: ' + escapeHtml(selectedDrug.shortDose || selectedDrug.dose) + '<br>' +
-            '<span class="note">' + escapeHtml(selectedDrug.note || '') + '</span>';
+          document.getElementById('patientDrug').innerHTML =
+            '<strong>' + escapeHtml(selectedDrug.label) + '</strong>';
 
-          const inst = []
+          const advice = []
             .concat(selectedDrug.instruction || [])
-            .concat([
-              'รับประทานยาให้ครบตามที่แนะนำ แม้อาการจะดีขึ้นแล้ว',
-              'หลีกเลี่ยงกลั้นปัสสาวะ และดื่มน้ำให้เหมาะสม'
-            ]);
+            .slice(0, 4);
 
-          instructions.innerHTML = inst.map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+          document.getElementById('patientAdviceList').innerHTML =
+            advice.map(x => '<li>' + escapeHtml(x) + '</li>').join('');
         } else {
-          drug.innerHTML = 'ยังไม่ได้เลือกยา กรุณากด “เลือกยานี้ทำการ์ดคนไข้” ใต้ตัวเลือกยา';
-          instructions.innerHTML = [
-            'กรุณาเลือกยาที่เหมาะสมจากผลการประเมิน',
-            'ตรวจสอบประวัติแพ้ยาและข้อห้ามใช้ก่อนจ่ายยา'
-          ].map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+          document.getElementById('patientDrug').innerHTML = 'ยังไม่ได้เลือกยา กรุณากด “เลือกใช้ในการ์ด”';
+          document.getElementById('patientAdviceList').innerHTML =
+            ['กรุณาเลือกยาจากผลการประเมิน', 'ตรวจสอบประวัติแพ้ยาและข้อห้ามใช้ก่อนจ่ายยา']
+              .map(x => '<li>' + escapeHtml(x) + '</li>').join('');
         }
-      }
 
-      alerts.innerHTML = [
-        'มีไข้สูง หนาวสั่น ปวดสีข้าง',
-        'อาการไม่ดีขึ้นภายใน 48-72 ชั่วโมง',
-        'ปัสสาวะมีเลือดมากขึ้น หรือปวดมากขึ้น',
-        'มีผื่น คัน หายใจลำบาก หลังเริ่มยา'
-      ].map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+        document.getElementById('patientAlertList').innerHTML =
+          [
+            'มีไข้สูง หนาวสั่น ปวดบริเวณสีข้าง',
+            'อาการไม่ดีขึ้นภายใน 72 ชั่วโมง',
+            'ปัสสาวะมีเลือดมากขึ้นหรือปวดมากขึ้น',
+            'มีผื่น คัน หรือหายใจลำบากหลังเริ่มยา'
+          ].map(x => '<li>' + escapeHtml(x) + '</li>').join('');
+      }
     }
 
-    async function capturePatientCardBlob() {
-      const card = document.getElementById('patientCard');
-      if (!card) throw new Error('ไม่พบการ์ดคำแนะนำ');
+    function getActiveCaptureElement() {
+      return document.getElementById('referralShell').classList.contains('active')
+        ? document.getElementById('referralCard')
+        : document.getElementById('patientCard');
+    }
 
-      const canvas = await html2canvas(card, {
-        scale: 2,
+    async function captureActiveCardBlob() {
+      const target = getActiveCaptureElement();
+      const canvas = await html2canvas(target, {
+        scale: 3,
         backgroundColor: '#ffffff',
         useCORS: true
       });
@@ -1242,14 +1218,14 @@
       document.body.appendChild(a);
       a.click();
       a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      setTimeout(() => URL.revokeObjectURL(url), 1200);
     }
 
     async function downloadCardImage() {
       try {
-        generateAdviceCard();
-        const blob = await capturePatientCardBlob();
-        downloadBlob(blob, 'UTI-Advice-Card.png');
+        generateShareCard();
+        const blob = await captureActiveCardBlob();
+        downloadBlob(blob, lastEvaluation && lastEvaluation.referral ? 'UTI-Referral-Card.png' : 'UTI-Advice-Card.png');
       } catch (err) {
         console.error(err);
         alert('บันทึกรูปภาพไม่สำเร็จ');
@@ -1258,45 +1234,47 @@
 
     async function shareCardImage() {
       try {
-        generateAdviceCard();
-        const blob = await capturePatientCardBlob();
-        const file = new File([blob], 'UTI-Advice-Card.png', { type: 'image/png' });
+        generateShareCard();
+        const blob = await captureActiveCardBlob();
+        const isReferral = lastEvaluation && lastEvaluation.referral;
+        const filename = isReferral ? 'UTI-Referral-Card.png' : 'UTI-Advice-Card.png';
+        const file = new File([blob], filename, { type: 'image/png' });
 
-        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        if (navigator.canShare && navigator.canShare({ files:[file] })) {
           await navigator.share({
-            files: [file],
-            title: 'การ์ดคำแนะนำคนไข้',
-            text: 'การ์ดคำแนะนำจากร้านยา'
+            files:[file],
+            title: isReferral ? 'ใบส่งต่อเบื้องต้นจากร้านยา' : 'การ์ดคำแนะนำสำหรับคนไข้',
+            text: isReferral ? 'ใบส่งต่อเบื้องต้นจากร้านยา' : 'การ์ดคำแนะนำสำหรับคนไข้'
           });
         } else {
-          downloadBlob(blob, 'UTI-Advice-Card.png');
-          alert('อุปกรณ์นี้ยังแชร์ไฟล์ภาพตรง ๆ ไม่ได้ ระบบจึงบันทึกรูปให้แทน แล้วค่อยส่งเข้า LINE จากแกลเลอรีได้');
+          downloadBlob(blob, filename);
+          alert('อุปกรณ์นี้ยังแชร์ไฟล์ภาพตรง ๆ ไม่ได้ ระบบจึงบันทึกรูปให้แทน');
         }
       } catch (err) {
         if (err.name !== 'AbortError') {
           console.error(err);
-          alert('แชร์รูปภาพไม่สำเร็จ ลองกดบันทึกรูปภาพแทน');
+          alert('แชร์รูปภาพไม่สำเร็จ');
         }
       }
     }
 
     function resetForm() {
       document.querySelectorAll('input[type="checkbox"]').forEach(el => el.checked = false);
+      ['priorDrug','glucoseLevel','immuneDetail','lowerRepeatCount','upperRepeatCount','age','crcl','patientNote']
+        .forEach(id => document.getElementById(id).value = '');
       document.getElementById('sex').value = 'female';
-      document.getElementById('age').value = '';
-      document.getElementById('crcl').value = '';
       document.getElementById('cultureAvailable').value = 'no';
-      document.getElementById('patientNote').value = '';
-      selectedDrug = null;
+
       lastEvaluation = null;
+      selectedDrug = null;
       currentDrugList = [];
 
       document.getElementById('resultArea').className = 'result warn';
       document.getElementById('resultArea').innerHTML =
         '<span class="pill pill-orange">ยังไม่ได้ประเมิน</span><div class="empty">กรอกข้อมูลแล้วกด “สรุปผลและแนะนำยา”</div>';
 
-      generateAdviceCard();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      generateShareCard();
+      window.scrollTo({ top:0, behavior:'smooth' });
     }
 
     function escapeHtml(str) {
