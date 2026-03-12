@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
 
-  <!-- PWA Meta Tags -->
-  <link id="manifest-link" rel="manifest" href="">
+  <!-- PWA Meta Tags (ฝัง Manifest และ Icon ลงไปตรงๆ เพื่อให้ Chrome ตรวจเจอทันที) -->
+  <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjoiVVRJIEN1dGUgR3VpZGUg4Liq4Liz4Lir4Lij4Lix4Lia4LmA4Lig4Liq4Lix4LiK4LiB4LijIiwic2hvcnRfbmFtZSI6IlVUSSBHdWlkZSIsInN0YXJ0X3VybCI6Ii4iLCJkaXNwbGF5Ijoic3RhbmRhbG9uZSIsImJhY2tncm91bmRfY29sb3IiOiIjZmZmYWZjIiwidGhlbWVfY29sb3MiOiIjOGI1Y2Y2IiwiaWNvbnMiOlt7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMmF5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0ExTVRJZ05URXlJajQ4Y21WalRDQjNhV1IwYURwaU5URXlJaUJoWldsbmFIVTlaVzRnZmlJPXg9SWpFd01DSWdaR2xzYkQwaUlqaGlOV05tTmlJdlBqeDBaWGgwSUhnOUlqVXdKU0lnZVQwaU5UVWxJaUJoYm1Ob2IzSTlJbTFwWkdSc1pTSWdaRzl0YVc1aGJuUXRZbUZ6Wld4cGJtVTlJbTFwWkdSc1pTSStUSk1qVTQ4TDNSbGVIUSs8TDNWMmN6ND0iLCJzaXplcyI6IjE5MngxOTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCIsInB1cnBvc2UiOiJhbnkgbWFza2FibGUifSx7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMmF5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0ExTVRJZ05URXlJajQ4Y21WalRDQjNhV1IwYURwaU5URXlJaUJoWldsbmFIVTlaVzRnZmlJPXg9SWpFd01DSWdaR2xzYkQwaUlqaGlOV05tTmlJdlBqeDBaWGgwSUhnOUlqVXdKU0lnZVQwaU5UVWxJaUJoYm1Ob2IzSTlJbTFwWkdSc1pTSWdaRzl0YVc1aGJuUXRZbUZ6Wld4cGJtVTlJbTFwWkdSc1pTSStUSk1qVTQ4TDNSbGVIUSs8TDNWMmN6ND0iLCJzaXplcyI6IjUxMng1MTIiLCJ0eXBlIjoiaW1hZ2Uvc3ZnK3htbCIsInB1cnBvc2UiOiJhbnkgbWFza2FibGUifV19">
   <meta name="theme-color" content="#8b5cf6">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="apple-mobile-web-app-title" content="UTI Guide">
-  <link id="apple-touch-icon" rel="apple-touch-icon" href="">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48cmVjdCB3aWR0aD0iNTEyIiBoZWlnaHQ9IjUxMiIgcng9IjEwMCIgZmlsbD0iIzhiNWNmNiIvPjx0ZXh0IHg9IjUwJSIgeT0iNTUlIiBmb250LXNpemU9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZG9taW5hbnQtYmFzZWxpbmU9Im1pZGRsZSI+8J+SgzwvdGV4dD48L3N2Zz4=">
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
@@ -524,6 +524,18 @@
   <div class="toast-container" id="toastContainer"></div>
 
   <div class="container">
+    
+    <!-- แจ้งเตือนกรณีเปิดผ่าน file:// ตรงๆ ป้องกันผู้ใช้สับสนว่าทำไม PWA ไม่ขึ้น -->
+    <div id="fileProtocolWarning" class="card danger hidden-print" style="display:none; margin-bottom: 14px;">
+      <h3 style="margin-top:0; color:#b91c1c;">⚠️ ไม่สามารถติดตั้งเป็นแอปได้ (PWA ถูกบล็อก)</h3>
+      <p style="margin:0; font-size:0.95rem;">ท่านกำลังดับเบิ้ลคลิกเปิดไฟล์นี้โดยตรงจากเครื่องคอมพิวเตอร์ (<code>file://</code>) <br>เบราว์เซอร์ <strong>Chrome จะไม่แสดงปุ่มติดตั้งแอป หรือไอคอนในช่อง URL</strong> เนื่องจากฟีเจอร์นี้ต้องทำงานผ่าน Server เท่านั้นครับ</p>
+      <div style="margin-top:10px; font-weight:bold;">วิธีแก้เพื่อให้ปุ่มติดตั้งขึ้น:</div>
+      <ul style="margin:5px 0 0; padding-left: 20px; font-size:0.9rem;">
+        <li>นำโค้ดไปฝากโฮสติ้งเว็บฟรี (แนะนำ) เช่น GitHub Pages, Vercel, Netlify</li>
+        <li>หรือ รันผ่านโปรแกรมจำลองเซิร์ฟเวอร์ เช่น Live Server บน VSCode</li>
+      </ul>
+    </div>
+
     <div class="hero hidden-print">
       <h1>💜 UTI Cute Guide สำหรับเภสัชกรร้านยา</h1>
       <p>
@@ -947,48 +959,24 @@
       setTimeout(() => { toast.remove(); }, 3000);
     }
 
-    // --- Dynamic PWA Implementation (Single File Solution) ---
-    function setupPWAManifest() {
-      // Create SVG Icon as Data URL
-      const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="#8b5cf6"/><text x="50%" y="55%" font-size="250" text-anchor="middle" dominant-baseline="middle">💜</text></svg>`;
-      const iconDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgIcon)));
-
-      // Generate Manifest
-      const manifest = {
-        name: "UTI Cute Guide สำหรับเภสัชกร",
-        short_name: "UTI Guide",
-        description: "คู่มือคัดกรอง UTIs สำหรับเภสัชกรร้านยาแบบออฟไลน์",
-        start_url: window.location.pathname, // Works dynamically wherever hosted
-        display: "standalone",
-        background_color: "#fffafc",
-        theme_color: "#8b5cf6",
-        icons: [
-          { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
-          { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
-        ]
-      };
-
-      // Set Manifest Link
-      const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
-      const manifestUrl = URL.createObjectURL(manifestBlob);
-      document.getElementById('manifest-link').setAttribute('href', manifestUrl);
-      document.getElementById('apple-touch-icon').setAttribute('href', iconDataUrl);
-    }
-
     async function registerServiceWorker() {
       if (!('serviceWorker' in navigator)) return;
+      // ข้ามการลงทะเบียน Service Worker ถ้ารันบน file:// เพราะจะติด Error แน่นอน
+      if (window.location.protocol === 'file:') return; 
+      
       try {
-        // Attempt to register a standard service worker if user hosted one.
-        // Even if this fails (e.g., file doesn't exist), modern Chrome (108+) 
-        // will still allow PWA installation based solely on the dynamic manifest above!
         await navigator.serviceWorker.register('./sw.js', { scope: './' });
       } catch (err) {
-        console.log('SW registration fallback - running without explicit offline cache script.');
+        console.log('SW setup skipped - Running without explicit offline cache script.');
       }
     }
 
     document.addEventListener('DOMContentLoaded', async function () {
-      setupPWAManifest(); // Initialize Dynamic PWA Manifest
+      // ตรวจสอบความพร้อมของ PWA (ต้องไม่รันบน file://)
+      if (window.location.protocol === 'file:') {
+        document.getElementById('fileProtocolWarning').style.display = 'block';
+      }
+
       loadSettings();
       autoBindSettings();
       refreshSignatures();
