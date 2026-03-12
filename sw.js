@@ -1,21 +1,48 @@
-self.addEventListener('install', (e) => {
-    // บังคับให้ Service Worker ตัวใหม่ทำงานทันที
-    self.skipWaiting();
+const CACHE_NAME = "uti-guide-v1";
+const APP_SHELL = [
+  "./",
+  "./index.html",
+  "./manifest.webmanifest",
+  "./sw.js",
+  "./icons/icon-192.png",
+  "./icons/icon-512.png"
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL))
+  );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (e) => {
-    // ควบคุมหน้าเว็บทั้งหมดที่อยู่ภายใต้ Scope ทันที
-    self.clients.claim();
-});
-
-self.addEventListener('fetch', (e) => {
-    // เบราว์เซอร์รุ่นใหม่บังคับให้ต้องมีการตอบสนอง (respondWith) จึงจะให้ผ่านเกณฑ์ PWA
-    e.respondWith(
-        fetch(e.request).catch(() => {
-            // ดักจับกรณีที่ผู้ใช้ออฟไลน์ (เน็ตหลุด)
-            return new Response('กรุณาเชื่อมต่ออินเทอร์เน็ตเพื่อใช้งานระบบประเมินผล', {
-                headers: { 'Content-Type': 'text/plain; charset=utf-8' }
-            });
+self.addEventListener("activate", (event) => {
+  event.waitUntil(
+    caches.keys().then((keys) =>
+      Promise.all(
+        keys.map((key) => {
+          if (key !== CACHE_NAME) return caches.delete(key);
         })
-    );
+      )
+    )
+  );
+  self.clients.claim();
+});
+
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
+
+  if (req.method !== "GET") return;
+
+  event.respondWith(
+    caches.match(req).then((cached) => {
+      return (
+        cached ||
+        fetch(req).then((response) => {
+          const responseClone = response.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(req, responseClone));
+          return response;
+        }).catch(() => caches.match("./index.html"))
+      );
+    })
+  );
 });
