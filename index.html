@@ -428,9 +428,50 @@
 
     .hidden-print{display:block}
 
+    .install-fab{
+      position:fixed;
+      right:16px;
+      bottom:16px;
+      z-index:9999;
+      display:none;
+      gap:8px;
+      align-items:center;
+      max-width:calc(100vw - 32px);
+    }
+
+    .install-fab button{
+      border-radius:999px;
+      padding:12px 16px;
+      box-shadow:0 12px 24px rgba(0,0,0,.12);
+      white-space:nowrap;
+    }
+
+    .install-fab-note{
+      background:#ffffff;
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:10px 12px;
+      font-size:.84rem;
+      color:var(--muted);
+      box-shadow:0 12px 24px rgba(0,0,0,.08);
+      max-width:220px;
+    }
+
+    @media(max-width:760px){
+      .install-fab{
+        right:12px;
+        left:12px;
+        bottom:12px;
+        justify-content:flex-end;
+      }
+      .install-fab-note{
+        display:none;
+      }
+    }
+
     @media print{
       body{background:#fff;padding:0}
-      .hidden-print, .hero, .card:not(#shareStageCard){display:none !important}
+      .hidden-print, .hero, .card:not(#shareStageCard), .install-fab{display:none !important}
       #shareStageCard{
         display:block !important;
         box-shadow:none;
@@ -447,8 +488,8 @@
     <div class="hero hidden-print">
       <h1>💜 UTI Cute Guide สำหรับเภสัชกรร้านยา</h1>
       <p>
-        คู่มือคัดกรอง UTIs แบบใช้งานง่ายบนมือถือ พร้อมการ์ดคำแนะนำสำหรับคนไข้,
-        ใบส่งต่อเบื้องต้นจากร้านยา, แชร์เป็นรูปภาพ และติดตั้งเป็นแอปได้
+        คู่มือคัดกรอง UTIs แบบใช้งานง่ายบนมือถือ พร้อมการ์ดคำแนะนำสำหรับคนไข้
+        และใบส่งต่อเบื้องต้นจากร้านยา
       </p>
       <div class="chip-row">
         <div class="chip">ไม่ใช้ฐานข้อมูล</div>
@@ -482,21 +523,6 @@
         <button class="btn-pink" onclick="previewGreeting()">ดูข้อความท้ายการ์ด</button>
       </div>
       <div id="greetingPreview" class="note"></div>
-    </div>
-
-    <div class="card hidden-print">
-      <div class="section-title">
-        <div>
-          <h2>ติดตั้งแอป</h2>
-          <div class="sub">ถ้าเบราว์เซอร์รองรับ ระบบจะเปิดหน้าต่างติดตั้งให้เอง</div>
-        </div>
-      </div>
-      <div class="btn-row-3">
-        <button id="installBtn" class="btn-primary" type="button" onclick="handleInstallClick()">ติดตั้งแอป</button>
-        <button id="installHelpBtn" class="btn-soft" type="button" onclick="showInstallHelp()">วิธีติดตั้ง</button>
-        <button id="installedBtn" class="btn-gray" type="button" style="display:none;">ติดตั้งแล้ว</button>
-      </div>
-      <div id="installHint" class="note">กำลังตรวจสอบความพร้อมของการติดตั้ง...</div>
     </div>
 
     <div class="card hidden-print">
@@ -807,58 +833,63 @@
           <thead>
             <tr>
               <th>ยา</th>
-              <th>ขนาด</th>
+              <th>วิธีใช้ที่อ่านง่าย</th>
               <th>หมายเหตุ</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Nitrofurantoin microcrystal</td>
-              <td>100 mg PO QID</td>
-              <td>กิน 5 วัน<br>*First-line therapy</td>
+              <td>รับประทานครั้งละ 100 มิลลิกรัม วันละ 4 ครั้ง นาน 5 วัน</td>
+              <td>First-line therapy</td>
             </tr>
             <tr>
               <td>Nitrofurantoin monohydrate/macrocrystal (75/25)</td>
-              <td>100 mg PO BID</td>
-              <td>ยาผสม monohydrate/macrocrystal ระคายเคืองทางเดินอาหารน้อยกว่าและออกฤทธิ์ยาวกว่า รูป microcrystal จึงสามารถบริหารยาวันละ 2 ครั้งได้</td>
+              <td>รับประทานครั้งละ 100 มิลลิกรัม วันละ 2 ครั้ง นาน 5 วัน</td>
+              <td>ระคายเคืองทางเดินอาหารน้อยกว่าและออกฤทธิ์ยาวกว่า</td>
             </tr>
             <tr>
               <td>Fosfomycin trometamol (oral)</td>
-              <td>3 g PO single dose</td>
-              <td>กรณี recurrent cystitis: 3 g PO for 2 doses (3 days apart)</td>
+              <td>รับประทานครั้งละ 3 กรัม เพียงครั้งเดียว</td>
+              <td>กรณี recurrent cystitis อาจใช้ 2 ครั้ง ห่างกัน 3 วัน ตามความเหมาะสม</td>
             </tr>
             <tr>
               <td>Amoxicillin/clavulanic acid</td>
-              <td>1 g PO BID</td>
+              <td>รับประทานครั้งละ 1 กรัม วันละ 2 ครั้ง หลังอาหารเช้าและเย็น นาน 7 วัน</td>
               <td></td>
             </tr>
             <tr>
               <td>Amoxicillin</td>
-              <td>500 mg PO BID</td>
+              <td>รับประทานครั้งละ 500 มิลลิกรัม วันละ 2 ครั้ง หลังอาหารเช้าและเย็น</td>
               <td></td>
             </tr>
             <tr>
               <td>Cefixime</td>
-              <td>400 mg PO OD หรือ BID</td>
+              <td>รับประทานครั้งละ 400 มิลลิกรัม วันละครั้ง หรือแบ่งตามฉลากยา นาน 7 วัน</td>
               <td></td>
             </tr>
             <tr>
               <td>Ciprofloxacin</td>
-              <td>500 mg PO BID</td>
+              <td>รับประทานครั้งละ 500 มิลลิกรัม วันละ 2 ครั้ง นาน 3 วัน</td>
               <td rowspan="3">แนะนำเฉพาะกรณี urine culture ยืนยันว่าเชื้อไวต่อยา เนื่องจากแนวโน้มดื้อต่อยาเหล่านี้สูง</td>
             </tr>
             <tr>
               <td>Levofloxacin</td>
-              <td>500 mg PO OD</td>
+              <td>รับประทานครั้งละ 500 มิลลิกรัม วันละครั้ง นาน 3 วัน</td>
             </tr>
             <tr>
               <td>Trimethoprim/sulfamethoxazole</td>
-              <td>Single strength (80/400 mg) 2 tabs PO BID</td>
+              <td>รับประทานครั้งละ 2 เม็ด วันละ 2 ครั้ง นาน 3 วัน</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
+  </div>
+
+  <div id="installFab" class="install-fab hidden-print">
+    <div id="installFabNote" class="install-fab-note">ติดตั้งแอปจากปุ่มนี้ หรือใช้เมนูเบราว์เซอร์</div>
+    <button id="installFabBtn" class="btn-primary" type="button" onclick="handleInstallClick()">ติดตั้งแอป</button>
   </div>
 
   <script>
@@ -874,7 +905,7 @@
       previewGreeting();
 
       await registerServiceWorker();
-      setTimeout(renderInstallUI, 800);
+      setTimeout(renderFloatingInstallUI, 800);
 
       generateShareCard();
     });
@@ -976,36 +1007,37 @@
       }
     }
 
-    function renderInstallUI() {
-      const installBtn = document.getElementById('installBtn');
-      const installHelpBtn = document.getElementById('installHelpBtn');
-      const installedBtn = document.getElementById('installedBtn');
-      const installHint = document.getElementById('installHint');
+    function renderFloatingInstallUI() {
+      const fab = document.getElementById('installFab');
+      const btn = document.getElementById('installFabBtn');
+      const note = document.getElementById('installFabNote');
+
+      if (!fab || !btn || !note) return;
 
       if (isStandaloneMode()) {
-        installBtn.style.display = 'none';
-        installHelpBtn.style.display = 'none';
-        installedBtn.style.display = 'inline-block';
-        installHint.innerHTML = 'อุปกรณ์นี้เปิดใช้งานแอปแบบติดตั้งแล้ว';
+        fab.style.display = 'none';
         return;
       }
 
-      installedBtn.style.display = 'none';
-      installBtn.style.display = 'inline-block';
-      installHelpBtn.style.display = 'inline-block';
-
       if (deferredPrompt) {
-        installHint.innerHTML = 'พร้อมติดตั้งแล้ว กดปุ่ม “ติดตั้งแอป” ได้เลย';
-      } else if (isIosDevice()) {
-        installHint.innerHTML = 'บน iPhone/iPad ให้เปิดด้วย Safari แล้วกด Share > Add to Home Screen';
-      } else {
-        installHint.innerHTML = 'ถ้ายังไม่มีหน้าต่างติดตั้ง ให้กด “วิธีติดตั้ง” หรือรีเฟรชหน้าอีก 1 ครั้งหลังอัปโหลดไฟล์ครบ';
+        fab.style.display = 'flex';
+        btn.textContent = 'ติดตั้งแอป';
+        note.textContent = 'พร้อมติดตั้งแล้ว';
+        return;
       }
+
+      if (isIosDevice()) {
+        fab.style.display = 'flex';
+        btn.textContent = 'วิธีติดตั้ง';
+        note.textContent = 'ใช้ Safari แล้วกด Share > Add to Home Screen';
+        return;
+      }
+
+      fab.style.display = 'none';
     }
 
     async function handleInstallClick() {
       if (isStandaloneMode()) {
-        alert('แอปนี้ถูกติดตั้งแล้ว หรือกำลังเปิดในโหมดแอป');
         return;
       }
 
@@ -1018,7 +1050,7 @@
         } catch (err) {
           console.error(err);
         }
-        renderInstallUI();
+        renderFloatingInstallUI();
         return;
       }
 
@@ -1036,12 +1068,12 @@
     window.addEventListener('beforeinstallprompt', (event) => {
       event.preventDefault();
       deferredPrompt = event;
-      renderInstallUI();
+      renderFloatingInstallUI();
     });
 
     window.addEventListener('appinstalled', () => {
       deferredPrompt = null;
-      renderInstallUI();
+      renderFloatingInstallUI();
     });
 
     function getChecked(id) {
@@ -1148,7 +1180,7 @@
           tagClass: 'pill-red',
           boxClass: 'danger',
           title: 'Upper UTIs',
-          summary: 'ใหวินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย',
+          summary: 'ให้วินิจฉัยจากการซักประวัติและตรวจร่างกาย ร่วมกับ urinalysis ควรส่งตรวจ urine culture ในผู้ป่วยทุกราย หากผู้ป่วยมีอาการรุนแรง หรือ sepsis/septic shock ให้ทำ hemoculture ด้วย',
           reasons: data.upperSymptoms,
           actions: ['Treatment: ส่งต่อเพื่อเข้ารับการรักษาในโรงพยาบาล'],
           drugs: [],
@@ -1202,14 +1234,14 @@
         if (crcl === '' || crcl >= 30) {
           drugs.push({
             name: 'Nitrofurantoin',
-            label: 'Nitrofurantoin 5 วัน',
-            dose: 'Nitrofurantoin 5 วัน หลีกเลี่ยงหาก CrCl < 30 mL/min',
-            shortDose: '100 mg PO QID x 5 วัน',
+            label: 'Nitrofurantoin กิน 5 วัน',
+            dose: 'รับประทานยานี้ต่อเนื่อง 5 วัน',
+            shortDose: 'ครั้งละ 100 มิลลิกรัม วันละ 4 ครั้ง หรือสูตรออกฤทธิ์ยาวครั้งละ 100 มิลลิกรัม วันละ 2 ครั้ง นาน 5 วัน',
             status: 'หลีกเลี่ยงหาก CrCl < 30 mL/min',
-            note: 'Nitrofurantoin microcrystal 100 mg PO QID หรือ monohydrate/macrocrystal 100 mg PO BID',
+            note: 'Nitrofurantoin microcrystal หรือ monohydrate/macrocrystal',
             howToUse: [
-              'สูตร microcrystal: ครั้งละ 100 mg วันละ 4 ครั้ง นาน 5 วัน',
-              'หรือสูตร monohydrate/macrocrystal: ครั้งละ 100 mg วันละ 2 ครั้ง นาน 5 วัน',
+              'สูตรทั่วไป: ครั้งละ 100 มิลลิกรัม วันละ 4 ครั้ง นาน 5 วัน',
+              'หรือสูตรออกฤทธิ์ยาว: ครั้งละ 100 มิลลิกรัม วันละ 2 ครั้ง นาน 5 วัน',
               'รับประทานหลังอาหารและดื่มน้ำตาม'
             ]
           });
@@ -1218,13 +1250,13 @@
         if (crcl === '' || crcl >= 10) {
           drugs.push({
             name: 'Fosfomycin',
-            label: 'Fosfomycin single dose',
-            dose: 'Fosfomycin single dose หลีกเลี่ยงหาก CrCl < 10 mL/min',
-            shortDose: '3 g PO single dose',
+            label: 'Fosfomycin กินครั้งเดียว',
+            dose: 'รับประทานครั้งเดียวตามขนาดที่กำหนด',
+            shortDose: 'ครั้งละ 3 กรัม เพียงครั้งเดียว',
             status: 'หลีกเลี่ยงหาก CrCl < 10 mL/min',
             note: 'Fosfomycin trometamol (oral)',
             howToUse: [
-              'ครั้งละ 3 g รับประทานครั้งเดียว',
+              'รับประทานครั้งละ 3 กรัม เพียงครั้งเดียว',
               'ละลายน้ำตามคำแนะนำของผลิตภัณฑ์ก่อนรับประทาน',
               'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง ให้ไปโรงพยาบาล'
             ]
@@ -1233,14 +1265,14 @@
 
         drugs.push({
           name: 'Oral third generation cephalosporin เช่น cefixime',
-          label: 'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
-          dose: 'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
-          shortDose: 'Cefixime 400 mg PO OD หรือ BID x 7 วัน',
+          label: 'Cefixime หรือยาในกลุ่มใกล้เคียง กิน 7 วัน',
+          dose: 'รับประทานต่อเนื่อง 7 วัน',
+          shortDose: 'Cefixime ครั้งละ 400 มิลลิกรัม วันละครั้ง หรือแบ่งตามฉลากยา นาน 7 วัน',
           status: '-',
           note: '-',
           howToUse: [
-            'Cefixime 400 mg รับประทานวันละครั้ง หรือแบ่งตามความเหมาะสม นาน 7 วัน',
-            'รับประทานยาให้ครบ 7 วัน',
+            'รับประทานครั้งละ 400 มิลลิกรัม วันละครั้ง หรือแบ่งตามฉลากยาที่ร้านจัดให้',
+            'รับประทานต่อเนื่องให้ครบ 7 วัน',
             'หากมีผื่น คัน หรือหายใจลำบาก ให้หยุดยาและไปโรงพยาบาล'
           ]
         });
@@ -1248,14 +1280,14 @@
         drugs.push({
           name: 'Amoxicillin/clavulanic acid',
           label: 'Amoxicillin/clavulanic acid กิน 7 วัน',
-          dose: 'Amoxicillin/clavulanic acid กิน 7 วัน',
-          shortDose: '1 g PO BID x 7 วัน',
+          dose: 'รับประทานต่อเนื่อง 7 วัน',
+          shortDose: 'รับประทานครั้งละ 1 กรัม วันละ 2 ครั้ง หลังอาหารเช้าและเย็น นาน 7 วัน',
           status: '-',
           note: '-',
           howToUse: [
-            'ครั้งละ 1 g วันละ 2 ครั้ง นาน 7 วัน',
-            'รับประทานพร้อมอาหารได้',
-            'รับประทานยาให้ครบ 7 วัน'
+            'รับประทานครั้งละ 1 กรัม วันละ 2 ครั้ง',
+            'ควรรับประทานหลังอาหารเช้าและเย็น',
+            'รับประทานต่อเนื่องให้ครบ 7 วัน'
           ]
         });
 
@@ -1263,14 +1295,14 @@
           drugs.push({
             name: 'Culture-directed',
             label: 'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา',
-            dose: 'Ciprofloxacin, Levofloxacin หรือ TMP/SMX ตามผล urine culture',
-            shortDose: 'ใช้ตามผล urine culture',
+            dose: 'ใช้ตามผลเพาะเชื้อและความไวต่อยา',
+            shortDose: 'เช่น Ciprofloxacin วันละ 2 ครั้ง 3 วัน, Levofloxacin วันละครั้ง 3 วัน หรือ TMP/SMX วันละ 2 ครั้ง 3 วัน',
             status: '-',
             note: 'ใช้เมื่อ urine culture ยืนยันว่าเชื้อไวต่อยา',
             howToUse: [
               'ใช้ตามผล urine culture เท่านั้น',
-              'Ciprofloxacin หรือ Levofloxacin กิน 3 วัน',
-              'หรือ TMP/SMX กิน 3 วัน ตามความเหมาะสม'
+              'Ciprofloxacin: วันละ 2 ครั้ง นาน 3 วัน',
+              'Levofloxacin: วันละครั้ง นาน 3 วัน หรือ TMP/SMX วันละ 2 ครั้ง นาน 3 วัน'
             ]
           });
         }
@@ -1283,12 +1315,9 @@
           summary: 'Lower UTIs โดยไม่พบ Upper UTIs หรือ Complicated UTIs / Alarm Sign จากข้อมูลที่กรอก',
           reasons: data.lowerSymptoms,
           actions: [
-            'Treatment:',
-            'Nitrofurantoin 5 วัน หลีกเลี่ยงหาก CrCl < 30 mL/min',
-            'Fosfomycin single dose หลีกเลี่ยงหาก CrCl < 10 mL/min',
-            'Oral third generation cephalosporin เช่น cefixime กิน 7 วัน',
-            'Amoxicillin/clavulanic acid กิน 7 วัน',
-            'ใช้เมื่อมีผล urine culture ยืนยันว่าไวต่อยา ได้แก่ Ciprofloxacin, Levofloxacin กิน 3 วัน หรือ TMP/SMX กิน 3 วัน'
+            'เลือกยาที่เหมาะสมจากตัวเลือกด้านล่าง',
+            'ตรวจสอบประวัติแพ้ยาและข้อห้ามใช้ทุกครั้ง',
+            'หากอาการไม่ดีขึ้นภายใน 72 ชั่วโมง หรือมีไข้/ปวดสีข้าง ให้ส่งต่อโรงพยาบาล'
           ],
           drugs: drugs,
           referral: false,
@@ -1338,7 +1367,7 @@
         result.drugs.forEach(function(drug, idx){
           html += '<div class="drug-card">';
           html += '<h4>💊 ' + escapeHtml(drug.label) + '</h4>';
-          html += '<div><strong>คำอธิบาย:</strong> ' + escapeHtml(drug.dose) + '</div>';
+          html += '<div><strong>วิธีใช้แบบอ่านง่าย:</strong> ' + escapeHtml(drug.shortDose) + '</div>';
           html += '<div class="drug-meta">';
           html += '<div><strong>ข้อควรระวัง:</strong> ' + escapeHtml(drug.status || '-') + '</div>';
           html += '<div><strong>หมายเหตุ:</strong> ' + escapeHtml(drug.note || '-') + '</div>';
