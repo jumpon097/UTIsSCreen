@@ -1,3 +1,19 @@
-self.addEventListener('fetch', e => e.respondWith(fetch(e.request)));
+// ไฟล์นี้เป็นตัวหลอกให้ Chrome รู้ว่าแอปรองรับการทำงานแบบ Offline
+const CACHE_NAME = 'uti-guide-v1';
 
-เพียงเท่านี้ Chrome จะมองว่าเว็บนี้เป็น PWA ที่ถูกต้อง 100% แล้วปุ่มดาวน์โหลดแอปหรือไอคอนคอมพิวเตอร์ที่ช่อง URL จะขึ้นมาให้กดแน่นอนครับ! (อาจต้องรอเคลียร์แคชและรีเฟรช 1-2 ครั้งหลังอัปเดตไฟล์ขึ้น GitHub นะครับ)
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
+});
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(clients.claim());
+});
+
+self.addEventListener('fetch', (event) => {
+  // บังคับให้โหลดข้อมูลผ่านเน็ตตามปกติ แต่ถ้าเน็ตหลุดจะไม่ทำเว็บพัง
+  event.respondWith(
+    fetch(event.request).catch(() => {
+      return new Response('ท่านกำลังใช้งานแบบออฟไลน์');
+    })
+  );
+});
