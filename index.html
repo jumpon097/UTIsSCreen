@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
 
-  <!-- PWA -->
-  <link rel="manifest" href="./manifest.json">
+  <!-- PWA Meta Tags -->
+  <link id="manifest-link" rel="manifest" href="">
   <meta name="theme-color" content="#8b5cf6">
-  <link rel="apple-touch-icon" href="./icons/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="UTI Guide">
+  <link id="apple-touch-icon" rel="apple-touch-icon" href="">
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 
@@ -45,6 +46,7 @@
       background:linear-gradient(180deg,#fff7fb 0%, #f9fbff 100%);
       color:var(--text);
       padding:14px;
+      min-height: 100vh;
     }
 
     .container{max-width:980px;margin:0 auto}
@@ -116,7 +118,9 @@
       border-radius:18px;
       padding:12px;
       background:#fff;
+      transition: all 0.2s;
     }
+    .box:hover { border-color: var(--primary); }
 
     .box label{
       display:flex;
@@ -167,6 +171,11 @@
       font-size:.96rem;
       background:#fff;
       color:var(--text);
+      transition: border-color 0.2s;
+    }
+    .field input:focus,.field textarea:focus,.field select:focus {
+      outline: none;
+      border-color: var(--primary);
     }
 
     textarea{
@@ -201,7 +210,10 @@
       font-size:.96rem;
       font-weight:700;
       cursor:pointer;
+      transition: transform 0.1s, opacity 0.2s;
     }
+    button:active { transform: scale(0.96); }
+    button:hover { opacity: 0.9; }
 
     .btn-primary{background:var(--primary);color:#fff}
     .btn-soft{background:#ede9fe;color:#5b21b6}
@@ -441,32 +453,57 @@
 
     .install-fab button{
       border-radius:999px;
-      padding:12px 16px;
-      box-shadow:0 12px 24px rgba(0,0,0,.12);
+      padding:12px 20px;
+      box-shadow:0 12px 24px rgba(139,92,246,.3);
       white-space:nowrap;
+      font-size: 1rem;
     }
 
     .install-fab-note{
       background:#ffffff;
       border:1px solid var(--line);
       border-radius:16px;
-      padding:10px 12px;
-      font-size:.84rem;
-      color:var(--muted);
+      padding:10px 14px;
+      font-size:.88rem;
+      color:var(--text);
+      font-weight: 600;
       box-shadow:0 12px 24px rgba(0,0,0,.08);
-      max-width:220px;
+      max-width:240px;
     }
+
+    /* Custom Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .toast {
+      background: rgba(45, 49, 66, 0.95);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 0.95rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      backdrop-filter: blur(8px);
+      animation: toastFadeIn 0.3s ease, toastFadeOut 0.3s ease 2.7s forwards;
+    }
+    @keyframes toastFadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastFadeOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(10px); } }
 
     @media(max-width:760px){
       .install-fab{
         right:12px;
         left:12px;
         bottom:12px;
-        justify-content:flex-end;
+        justify-content:center;
       }
-      .install-fab-note{
-        display:none;
-      }
+      .install-fab-note{ display:none; }
     }
 
     @media print{
@@ -479,11 +516,13 @@
         margin:0;
         padding:0;
       }
-      .share-card{box-shadow:none;border:1px solid #ddd}
+      .share-card{box-shadow:none;border:1px solid #ddd; width:100%; min-height:auto; display:block; break-inside: avoid;}
     }
   </style>
 </head>
 <body>
+  <div class="toast-container" id="toastContainer"></div>
+
   <div class="container">
     <div class="hero hidden-print">
       <h1>💜 UTI Cute Guide สำหรับเภสัชกรร้านยา</h1>
@@ -495,7 +534,7 @@
         <div class="chip">ไม่ใช้ฐานข้อมูล</div>
         <div class="chip">จำชื่อร้านยาในเครื่อง</div>
         <div class="chip">แชร์เข้า LINE ได้</div>
-        <div class="chip">รองรับ PWA</div>
+        <div class="chip" style="background:var(--primary-soft);color:var(--primary);font-weight:bold;">🚀 รองรับ PWA (ทำงานออฟไลน์ได้)</div>
       </div>
     </div>
 
@@ -888,8 +927,8 @@
   </div>
 
   <div id="installFab" class="install-fab hidden-print">
-    <div id="installFabNote" class="install-fab-note">ติดตั้งแอปจากปุ่มนี้ หรือใช้เมนูเบราว์เซอร์</div>
-    <button id="installFabBtn" class="btn-primary" type="button" onclick="handleInstallClick()">ติดตั้งแอป</button>
+    <div id="installFabNote" class="install-fab-note">ติดตั้งแอปเพื่อใช้งานแบบออฟไลน์</div>
+    <button id="installFabBtn" class="btn-primary" type="button" onclick="handleInstallClick()">🚀 ติดตั้งแอป</button>
   </div>
 
   <script>
@@ -898,7 +937,58 @@
     let currentDrugList = [];
     let deferredPrompt = null;
 
+    // --- Custom Toast Notification ---
+    function showToast(message) {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => { toast.remove(); }, 3000);
+    }
+
+    // --- Dynamic PWA Implementation (Single File Solution) ---
+    function setupPWAManifest() {
+      // Create SVG Icon as Data URL
+      const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="100" fill="#8b5cf6"/><text x="50%" y="55%" font-size="250" text-anchor="middle" dominant-baseline="middle">💜</text></svg>`;
+      const iconDataUrl = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgIcon)));
+
+      // Generate Manifest
+      const manifest = {
+        name: "UTI Cute Guide สำหรับเภสัชกร",
+        short_name: "UTI Guide",
+        description: "คู่มือคัดกรอง UTIs สำหรับเภสัชกรร้านยาแบบออฟไลน์",
+        start_url: window.location.pathname, // Works dynamically wherever hosted
+        display: "standalone",
+        background_color: "#fffafc",
+        theme_color: "#8b5cf6",
+        icons: [
+          { src: iconDataUrl, sizes: "192x192", type: "image/svg+xml", purpose: "any maskable" },
+          { src: iconDataUrl, sizes: "512x512", type: "image/svg+xml", purpose: "any maskable" }
+        ]
+      };
+
+      // Set Manifest Link
+      const manifestBlob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+      const manifestUrl = URL.createObjectURL(manifestBlob);
+      document.getElementById('manifest-link').setAttribute('href', manifestUrl);
+      document.getElementById('apple-touch-icon').setAttribute('href', iconDataUrl);
+    }
+
+    async function registerServiceWorker() {
+      if (!('serviceWorker' in navigator)) return;
+      try {
+        // Attempt to register a standard service worker if user hosted one.
+        // Even if this fails (e.g., file doesn't exist), modern Chrome (108+) 
+        // will still allow PWA installation based solely on the dynamic manifest above!
+        await navigator.serviceWorker.register('./sw.js', { scope: './' });
+      } catch (err) {
+        console.log('SW registration fallback - running without explicit offline cache script.');
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', async function () {
+      setupPWAManifest(); // Initialize Dynamic PWA Manifest
       loadSettings();
       autoBindSettings();
       refreshSignatures();
@@ -929,7 +1019,7 @@
       localStorage.setItem('uti_pharmacist_name', document.getElementById('pharmacistName').value.trim());
       refreshSignatures();
       previewGreeting();
-      alert('บันทึก Settings เรียบร้อย');
+      showToast('บันทึก Settings เรียบร้อย');
     }
 
     function loadSettings() {
@@ -946,7 +1036,7 @@
       document.getElementById('pharmacistName').value = '';
       refreshSignatures();
       previewGreeting();
-      alert('ล้าง Settings แล้ว');
+      showToast('ล้าง Settings แล้ว');
     }
 
     function previewGreeting() {
@@ -998,15 +1088,6 @@
              window.navigator.standalone === true;
     }
 
-    async function registerServiceWorker() {
-      if (!('serviceWorker' in navigator)) return;
-      try {
-        await navigator.serviceWorker.register('./sw.js', { scope: './' });
-      } catch (err) {
-        console.error('SW registration failed', err);
-      }
-    }
-
     function renderFloatingInstallUI() {
       const fab = document.getElementById('installFab');
       const btn = document.getElementById('installFabBtn');
@@ -1021,25 +1102,24 @@
 
       if (deferredPrompt) {
         fab.style.display = 'flex';
-        btn.textContent = 'ติดตั้งแอป';
-        note.textContent = 'พร้อมติดตั้งแล้ว';
+        btn.textContent = '🚀 ติดตั้งแอป';
+        note.textContent = 'ติดตั้งแอปลงเครื่องเพื่อใช้งานแบบออฟไลน์ได้';
         return;
       }
 
       if (isIosDevice()) {
         fab.style.display = 'flex';
-        btn.textContent = 'วิธีติดตั้ง';
-        note.textContent = 'ใช้ Safari แล้วกด Share > Add to Home Screen';
+        btn.textContent = 'วิธีติดตั้ง (iOS)';
+        note.textContent = 'แตะปุ่ม Share ด้านล่าง > เลือก Add to Home Screen';
         return;
       }
 
+      // Hide if cannot install
       fab.style.display = 'none';
     }
 
     async function handleInstallClick() {
-      if (isStandaloneMode()) {
-        return;
-      }
+      if (isStandaloneMode()) return;
 
       if (deferredPrompt) {
         const promptEvent = deferredPrompt;
@@ -1053,15 +1133,14 @@
         renderFloatingInstallUI();
         return;
       }
-
       showInstallHelp();
     }
 
     function showInstallHelp() {
       if (isIosDevice()) {
-        alert('บน iPhone/iPad ให้เปิดเว็บนี้ด้วย Safari แล้วแตะปุ่ม Share จากนั้นเลือก "Add to Home Screen"');
+        showToast('บน iPhone/iPad ให้แตะปุ่ม Share จากนั้นเลือก "Add to Home Screen"');
       } else {
-        alert('ถ้าไม่มีหน้าต่างติดตั้งขึ้น ให้เปิดเว็บนี้ด้วย Chrome หรือ Edge แล้วกดเมนูเบราว์เซอร์ > Install app หรือ Add to Home Screen');
+        showToast('เปิดเมนูของเบราว์เซอร์แล้วเลือก "Install app" หรือ "Add to Home screen"');
       }
     }
 
@@ -1074,6 +1153,7 @@
     window.addEventListener('appinstalled', () => {
       deferredPrompt = null;
       renderFloatingInstallUI();
+      showToast('ติดตั้งแอปเรียบร้อยแล้ว!');
     });
 
     function getChecked(id) {
@@ -1389,7 +1469,7 @@
       if (!currentDrugList[index]) return;
       selectedDrug = currentDrugList[index];
       generateShareCard();
-      alert('เลือกยาเรียบร้อยแล้ว');
+      showToast('เลือกยาเรียบร้อยแล้ว การ์ดด้านล่างอัปเดตแล้ว');
       document.getElementById('shareStageCard').scrollIntoView({ behavior:'smooth' });
     }
 
@@ -1511,9 +1591,10 @@
         generateShareCard();
         const blob = await captureActiveCardBlob();
         downloadBlob(blob, lastEvaluation && lastEvaluation.referral ? 'UTI-Referral-Card.png' : 'UTI-Advice-Card.png');
+        showToast('บันทึกรูปภาพสำเร็จ');
       } catch (err) {
         console.error(err);
-        alert('บันทึกรูปภาพไม่สำเร็จ');
+        showToast('บันทึกรูปภาพไม่สำเร็จ');
       }
     }
 
@@ -1533,12 +1614,12 @@
           });
         } else {
           downloadBlob(blob, filename);
-          alert('อุปกรณ์นี้ยังแชร์ไฟล์ภาพตรง ๆ ไม่ได้ ระบบจึงบันทึกรูปให้แทน');
+          showToast('อุปกรณ์นี้แชร์ไฟล์ภาพตรงๆ ไม่ได้ ระบบจึงบันทึกรูปลงเครื่องแทน');
         }
       } catch (err) {
         if (err.name !== 'AbortError') {
           console.error(err);
-          alert('แชร์รูปภาพไม่สำเร็จ');
+          showToast('แชร์รูปภาพไม่สำเร็จ');
         }
       }
     }
@@ -1560,6 +1641,7 @@
 
       generateShareCard();
       window.scrollTo({ top:0, behavior:'smooth' });
+      showToast('ล้างข้อมูลฟอร์มเรียบร้อย');
     }
 
     function escapeHtml(str) {
