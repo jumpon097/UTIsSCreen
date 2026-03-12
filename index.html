@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UTI Cute Guide</title>
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <link rel="manifest" href="./manifest.webmanifest">
+<meta name="theme-color" content="#8b5cf6">
+
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
   <style>
     :root{
       --bg:#fffafc;
@@ -81,6 +87,17 @@
       .grid-2,.grid-3{grid-template-columns:1fr}
       .hero h1{font-size:1.26rem}
     }
+    <div class="btn-row-3" style="margin-top:10px">
+  <button id="installBtn" class="btn-primary" type="button" style="display:none;">
+    ติดตั้งแอป
+  </button>
+  <button id="iosInstallBtn" class="btn-soft" type="button" style="display:none;">
+    วิธีติดตั้งบน iPhone/iPad
+  </button>
+  <button id="openInstalledHintBtn" class="btn-gray" type="button" style="display:none;">
+    เปิดใช้งานแล้ว
+  </button>
+</div>
 
     .box{
       border:1px solid var(--line);
@@ -1286,5 +1303,89 @@
         .replace(/'/g, '&#039;');
     }
   </script>
+  <script>
+  let deferredPrompt = null;
+
+  const installBtn = document.getElementById("installBtn");
+  const iosInstallBtn = document.getElementById("iosInstallBtn");
+  const openInstalledHintBtn = document.getElementById("openInstalledHintBtn");
+
+  const isIos = /iphone|ipad|ipod/i.test(window.navigator.userAgent);
+  const isStandalone =
+    window.matchMedia("(display-mode: standalone)").matches ||
+    window.navigator.standalone === true;
+
+  async function registerServiceWorker() {
+    if (!("serviceWorker" in navigator)) return;
+
+    try {
+      await navigator.serviceWorker.register("./sw.js", { scope: "./" });
+      console.log("Service Worker registered");
+    } catch (err) {
+      console.error("Service Worker registration failed:", err);
+    }
+  }
+
+  function updateInstallUI() {
+    if (isStandalone) {
+      installBtn.style.display = "none";
+      iosInstallBtn.style.display = "none";
+      openInstalledHintBtn.style.display = "inline-flex";
+      return;
+    }
+
+    if (deferredPrompt) {
+      installBtn.style.display = "inline-flex";
+    } else {
+      installBtn.style.display = "none";
+    }
+
+    if (isIos && !isStandalone) {
+      iosInstallBtn.style.display = "inline-flex";
+    } else {
+      iosInstallBtn.style.display = "none";
+    }
+
+    openInstalledHintBtn.style.display = "none";
+  }
+
+  window.addEventListener("load", async () => {
+    await registerServiceWorker();
+    updateInstallUI();
+  });
+
+  window.addEventListener("beforeinstallprompt", (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    updateInstallUI();
+  });
+
+  installBtn?.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+    const choice = await deferredPrompt.userChoice;
+    console.log("Install choice:", choice.outcome);
+
+    deferredPrompt = null;
+    updateInstallUI();
+  });
+
+  window.addEventListener("appinstalled", () => {
+    deferredPrompt = null;
+    updateInstallUI();
+    console.log("PWA installed");
+  });
+
+  iosInstallBtn?.addEventListener("click", () => {
+    alert(
+      'บน iPhone/iPad ให้เปิดเว็บนี้ด้วย Safari แล้วแตะปุ่ม Share จากนั้นเลือก "Add to Home Screen"'
+    );
+  });
+
+  openInstalledHintBtn?.addEventListener("click", () => {
+    alert("แอปถูกติดตั้งแล้ว หรือกำลังเปิดในโหมดแอป");
+  });
+</script>
 </body>
 </html>
