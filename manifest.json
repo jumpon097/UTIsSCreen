@@ -2,7 +2,7 @@
   "name": "UTI Cute Guide สำหรับเภสัชกร",
   "short_name": "UTI Guide",
   "description": "คู่มือคัดกรอง UTIs สำหรับเภสัชกรร้านยาแบบออฟไลน์",
-  "start_url": ".",
+  "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#fffafc",
   "theme_color": "#8b5cf6",
